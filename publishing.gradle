@@ -1,0 +1,21 @@
+apply plugin: "org.jetbrains.dokka"
+apply plugin: "com.vanniktech.maven.publish"
+
+mavenPublish {
+  releaseSigningEnabled = !getGpgKey().isEmpty()
+
+  nexus {
+    baseUrl = "https://s01.oss.sonatype.org/service/local/"
+  }
+}
+
+def getGpgKey() {
+  return findProperty("signingKey") ?: ""
+}
+
+signing {
+  def signingKey = getGpgKey()
+  if(!signingKey.isEmpty()) {
+    useInMemoryPgpKeys(signingKey, "")
+  }
+}
