@@ -1,8 +1,10 @@
 Under development
 
+Based on the [ColorPickerDemo](https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/material/material/integration-tests/material-demos/src/main/java/androidx/compose/material/demos/ColorPickerDemo.kt) from the AOSP compose samples.
+
 ```
 repositories {
-  maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+  maven { url "https://s01.oss.sonatype.org/content/repositories/snapshots" }
 }
 
 dependencies {
