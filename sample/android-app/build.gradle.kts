@@ -36,14 +36,14 @@ dependencies {
   implementation(project(":sample:app"))
   implementation("androidx.core:core-ktx:1.5.0-beta02")
   implementation("androidx.appcompat:appcompat:1.3.0-beta01")
-  implementation("androidx.activity:activity-compose:1.3.0-alpha03") {
+  implementation("androidx.activity:activity-compose:1.3.0-alpha06") {
     exclude(group = "androidx.compose.animation")
     exclude(group = "androidx.compose.foundation")
     exclude(group = "androidx.compose.material")
     exclude(group = "androidx.compose.runtime")
     exclude(group = "androidx.compose.ui")
   }
-  implementation("androidx.compose.ui:ui-tooling:1.0.0-beta01") {
+  implementation("androidx.compose.ui:ui-tooling:1.0.0-beta04") {
     exclude(group = "androidx.compose.animation")
     exclude(group = "androidx.compose.foundation")
     exclude(group = "androidx.compose.material")
