@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-./gradlew :library:clean :library:build :library:publish --no-daemon --no-parallel
+./gradlew :library:clean :library:build :library:publish --no-daemon --no-parallel && \
 
 if ! grep -q -- "VERSION_NAME=.*-SNAPSHOT" gradle.properties;
 then
