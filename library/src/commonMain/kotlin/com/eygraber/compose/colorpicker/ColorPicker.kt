@@ -48,7 +48,6 @@ import androidx.compose.ui.graphics.RadialGradientShader
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.SweepGradientShader
 import androidx.compose.ui.graphics.isSpecified
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.graphics.toPixelMap
 import androidx.compose.ui.input.pointer.consumePositionChange
 import androidx.compose.ui.input.pointer.pointerInput
@@ -56,7 +55,6 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import kotlin.math.roundToInt
 
 @Composable
 public fun ColorPicker(
@@ -161,7 +159,7 @@ private fun Magnifier(
     Modifier.offset(
       position.x.toDp() - options.width / 2,
       // Align with the center of the selection circle
-      position.y.toDp() - (options.height - (options.selectionCircleDiameter / 2))
+      position.y.toDp() - (options.height - options.selectionCircleDiameter / 2)
     )
   }
   MagnifierTransition(
@@ -169,7 +167,7 @@ private fun Magnifier(
     options.width,
     options.selectionCircleDiameter
   ) { labelWidth: Dp, selectionDiameter: Dp,
-      alpha: Float ->
+    alpha: Float ->
     Column(
       offset.size(width = options.width, height = options.height)
         .alpha(alpha)
@@ -210,7 +208,8 @@ private fun MagnifierTransition(
     transitionSpec = {
       if(true isTransitioningTo false) {
         tween(delayMillis = 100, durationMillis = 200)
-      } else {
+      }
+      else {
         tween()
       }
     }
@@ -347,7 +346,7 @@ private fun ColorWheel.colorForPosition(position: Offset): Color {
   val x = position.x.toInt()
   val y = position.y.toInt()
   with(image.toPixelMap()) {
-    if(x < 0 || y < 0 || x >= width || y >= height) return Color.Unspecified
+    if(x !in 0 until width || y !in 0 until height) return Color.Unspecified
     return this[x, y].takeIf { it.alpha > 0F } ?: Color.Unspecified
   }
 }

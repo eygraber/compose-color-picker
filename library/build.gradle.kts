@@ -2,15 +2,11 @@ plugins {
     id("com.android.library")
     kotlin("multiplatform")
     id("org.jetbrains.compose")
+    detekt
+    publish
 }
 
 android {
-    configurations {
-        create("testApi")
-        create("testDebugApi")
-        create("testReleaseApi")
-    }
-
     compileSdk = 30
 
     defaultConfig {
@@ -72,18 +68,8 @@ kotlin {
             }
         }
 
-        val androidMain by getting {
-            dependsOn(commonMain)
-        }
-
-        val desktopMain by getting {
-            dependsOn(commonMain)
-        }
-
         all {
             languageSettings.useExperimentalAnnotation("kotlin.RequiresOptIn")
         }
     }
 }
-
-apply(from = File(rootDir, "publishing.gradle"))
