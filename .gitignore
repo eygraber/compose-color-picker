@@ -2,6 +2,8 @@
 .gradle
 /local.properties
 /.idea
+# Make an exception for the code style
+!.idea/codeStyles/
 .DS_Store
 build/
 /captures

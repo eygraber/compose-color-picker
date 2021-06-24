@@ -120,12 +120,14 @@ private fun ColumnScope.Controls(
           color = selectedColor
         )
 
-        IconButton(onClick = {
-          onSelectedColorChanged(defaultColor)
-          onAlphaChanged(1F)
-          onBrightnessChanged(1F)
-          resetSelectedPosition()
-        }) {
+        IconButton(
+          onClick = {
+            onSelectedColorChanged(defaultColor)
+            onAlphaChanged(1F)
+            onBrightnessChanged(1F)
+            resetSelectedPosition()
+          }
+        ) {
           Icon(
             imageVector = Icons.Rounded.Refresh,
             contentDescription = "Back to defaults"
