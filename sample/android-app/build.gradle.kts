@@ -5,12 +5,12 @@ plugins {
 }
 
 android {
-  compileSdkVersion(30)
+  compileSdk = 30
 
   defaultConfig {
     applicationId = "com.eygraber.compose.colorpicker.sample"
-    minSdkVersion(24)
-    targetSdkVersion(30)
+    minSdk = 24
+    targetSdk = 30
     versionCode = 1
     versionName = "1.0"
   }
@@ -34,16 +34,16 @@ android {
 
 dependencies {
   implementation(project(":sample:app"))
-  implementation("androidx.core:core-ktx:1.5.0-beta02")
-  implementation("androidx.appcompat:appcompat:1.3.0-beta01")
-  implementation("androidx.activity:activity-compose:1.3.0-alpha06") {
+  implementation("androidx.core:core-ktx:1.6.0-rc01")
+  implementation("androidx.appcompat:appcompat:1.3.0-rc01")
+  implementation("androidx.activity:activity-compose:1.3.0-beta02") {
     exclude(group = "androidx.compose.animation")
     exclude(group = "androidx.compose.foundation")
     exclude(group = "androidx.compose.material")
     exclude(group = "androidx.compose.runtime")
     exclude(group = "androidx.compose.ui")
   }
-  implementation("androidx.compose.ui:ui-tooling:1.0.0-beta04") {
+  implementation("androidx.compose.ui:ui-tooling:1.0.0-beta09") {
     exclude(group = "androidx.compose.animation")
     exclude(group = "androidx.compose.foundation")
     exclude(group = "androidx.compose.material")
