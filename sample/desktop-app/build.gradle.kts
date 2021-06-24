@@ -2,6 +2,7 @@ plugins {
   kotlin("jvm")
   id("org.jetbrains.compose")
   detekt
+  `detekt-hotfix`
 }
 
 kotlin {

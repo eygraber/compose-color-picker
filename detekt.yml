@@ -409,7 +409,7 @@ naming:
     excludeClassPattern: '$^'
     ignoreOverridden: true
   InvalidPackageDeclaration:
-    active: true
+    active: false
     excludes: ['*.kts']
     rootPackage: ''
   MatchingDeclarationName:
