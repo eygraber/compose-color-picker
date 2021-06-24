@@ -11,11 +11,11 @@ android {
         create("testReleaseApi")
     }
 
-    compileSdkVersion(30)
+    compileSdk = 30
 
     defaultConfig {
-        minSdkVersion(24)
-        targetSdkVersion(30)
+        minSdk = 24
+        targetSdk = 30
     }
 
     buildTypes {
@@ -48,6 +48,7 @@ kotlin {
         kotlinOptions {
             allWarningsAsErrors = true
             jvmTarget = "1.8"
+            freeCompilerArgs = listOf("-Xopt-in=kotlin.RequiresOptIn")
         }
     }
 
@@ -69,5 +70,13 @@ kotlin {
         val desktopMain by getting {
             dependsOn(commonMain)
         }
+    }
+
+    targets.configureEach {
+      compilations.configureEach {
+        kotlinOptions {
+          freeCompilerArgs = listOf("-Xopt-in=kotlin.RequiresOptIn")
+        }
+      }
     }
 }
