@@ -3,6 +3,7 @@ plugins {
   kotlin("multiplatform")
   id("org.jetbrains.compose")
   detekt
+  `detekt-hotfix`
 }
 
 android {

@@ -4,6 +4,7 @@ plugins {
     id("org.jetbrains.compose")
     detekt
     publish
+    `detekt-hotfix`
 }
 
 android {
