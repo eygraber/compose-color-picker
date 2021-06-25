@@ -7,6 +7,8 @@ plugins {
 detekt {
   toolVersion = "1.17.1"
 
+  input.from("build.gradle.kts")
+
   autoCorrect = true
   parallel = true
 
