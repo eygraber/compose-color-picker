@@ -409,8 +409,8 @@ naming:
     excludeClassPattern: '$^'
     ignoreOverridden: true
   InvalidPackageDeclaration:
-    active: false
-    excludes: ['*.kts']
+    active: true
+    excludes: ['**/*.kts']
     rootPackage: ''
   MatchingDeclarationName:
     active: false
