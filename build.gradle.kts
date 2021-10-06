@@ -5,7 +5,7 @@ buildscript {
   }
 
   dependencies {
-    classpath("org.jetbrains.compose:compose-gradle-plugin:0.5.0-build226")
+    classpath("org.jetbrains.compose:compose-gradle-plugin:1.0.0-alpha4-build385")
   }
 }
 
