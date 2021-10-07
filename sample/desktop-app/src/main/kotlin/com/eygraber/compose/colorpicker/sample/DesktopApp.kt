@@ -1,10 +1,10 @@
 package com.eygraber.compose.colorpicker.sample
 
-import androidx.compose.desktop.Window
+import androidx.compose.ui.window.singleWindowApplication
 import kotlinx.coroutines.DelicateCoroutinesApi
 
 @DelicateCoroutinesApi fun main() {
-  Window(title = "Color Picker Sample") {
+  singleWindowApplication(title = "Color Picker Sample") {
     Sample()
   }
 }

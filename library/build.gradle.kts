@@ -8,11 +8,11 @@ plugins {
 }
 
 android {
-  compileSdk = 30
+  compileSdk = 31
 
   defaultConfig {
     minSdk = 24
-    targetSdk = 30
+    targetSdk = 31
   }
 
   buildTypes {
@@ -70,7 +70,7 @@ kotlin {
     }
 
     all {
-      languageSettings.useExperimentalAnnotation("kotlin.RequiresOptIn")
+      languageSettings.optIn("kotlin.RequiresOptIn")
     }
   }
 }
