@@ -10,7 +10,7 @@ kotlin {
     compilations.all {
       kotlinOptions {
         allWarningsAsErrors = true
-        jvmTarget = "1.8"
+        jvmTarget = "11"
       }
     }
   }

@@ -44,12 +44,12 @@ kotlin {
   }
 
   jvm("desktop").compilations.all {
-    compileKotlinTask.sourceCompatibility = "1.8"
-    compileKotlinTask.targetCompatibility = "1.8"
+    compileKotlinTask.sourceCompatibility = "11"
+    compileKotlinTask.targetCompatibility = "11"
 
     kotlinOptions {
       allWarningsAsErrors = true
-      jvmTarget = "1.8"
+      jvmTarget = "11"
     }
   }
 
