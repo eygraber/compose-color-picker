@@ -1,0 +1,100 @@
+name: Check
+
+on:
+  pull_request
+
+jobs:
+  danger:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Danger
+        uses: docker://ghcr.io/danger/danger-kotlin:1.0.0
+        with:
+            args: --failOnErrors --no-publish-check
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  detekt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-java@v3.6.0
+        with:
+          distribution: 'zulu'
+          java-version: 11
+
+      - uses: gradle/wrapper-validation-action@v1.0.5
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2.3.3
+        with:
+          gradle-version: wrapper
+
+      - name: Run checks
+        run: ./gradlew detekt
+
+  detekt_type_resolution:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-java@v3.6.0
+        with:
+          distribution: 'zulu'
+          java-version: 11
+
+      - uses: gradle/wrapper-validation-action@v1.0.5
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2.3.3
+        with:
+          gradle-version: wrapper
+
+      - name: Run detekt with type resolution
+        run: ./gradlew detektJvmMain detektJsMain detektDebug detektMetadataMain
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-java@v3.6.0
+        with:
+          distribution: 'zulu'
+          java-version: 11
+
+      - uses: gradle/wrapper-validation-action@v1.0.5
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2.3.3
+        with:
+          gradle-version: wrapper
+
+      - name: Run checks
+        run: ./gradlew lintRelease
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-java@v3.6.0
+        with:
+          distribution: 'zulu'
+          java-version: 11
+
+      - uses: gradle/wrapper-validation-action@v1.0.5
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2.3.3
+        with:
+          gradle-version: wrapper
+
+      - name: Run checks
+        run: ./gradlew test
+
+env:
+  GRADLE_OPTS: -Dorg.gradle.daemon=false -Dorg.gradle.configureondemand=true -Dkotlin.incremental=false -Dorg.gradle.jvmargs="-Xmx4g -Xms128m -XX:MaxPermSize=4096m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8 -XX:MaxMetaspaceSize=1024m"

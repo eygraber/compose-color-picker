@@ -1,76 +1,37 @@
+import com.eygraber.colorpicker.gradle.colorTargets
+
 plugins {
-  id("com.android.library")
-  kotlin("multiplatform")
-  id("org.jetbrains.compose")
-  detekt
-  publish
-  `detekt-hotfix`
+  id("color-kotlin-multiplatform")
+  id("color-android-library")
+  id("color-compose-jetbrains")
+  id("color-detekt")
+  id("color-publish")
 }
 
 android {
-  compileSdk = 31
-
-  defaultConfig {
-    minSdk = 24
-    targetSdk = 31
-  }
-
-  buildTypes {
-    getByName("release") {
-      isMinifyEnabled = false
-    }
-  }
-
-  compileOptions {
-    isCoreLibraryDesugaringEnabled = true
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
-  }
-
-  packagingOptions {
-    resources.pickFirsts += "META-INF/*"
-  }
-
-  dependencies {
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
-  }
+  namespace = "com.eygraber.compose.colorpicker"
 }
 
 kotlin {
   explicitApi()
 
-  android {
-    publishLibraryVariants("release")
-  }
-
-  jvm("desktop").compilations.all {
-    compileKotlinTask.sourceCompatibility = "11"
-    compileKotlinTask.targetCompatibility = "11"
-
-    kotlinOptions {
-      allWarningsAsErrors = true
-      jvmTarget = "11"
-    }
-  }
+  colorTargets()
 
   sourceSets {
     val commonMain by getting {
       dependencies {
-        implementation(compose.runtime)
         implementation(compose.foundation)
-        implementation(compose.material)
-        implementation(compose.ui)
+        @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+        implementation(compose.material3)
+        implementation(compose.runtime)
       }
     }
+
     val commonTest by getting {
       dependencies {
         implementation(kotlin("test-common"))
         implementation(kotlin("test-annotations-common"))
       }
-    }
-
-    all {
-      languageSettings.optIn("kotlin.RequiresOptIn")
     }
   }
 }

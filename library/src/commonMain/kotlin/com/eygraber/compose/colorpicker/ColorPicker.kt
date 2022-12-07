@@ -25,9 +25,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.GenericShape
-import androidx.compose.material.LocalTextStyle
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.getValue
@@ -49,7 +49,6 @@ import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.SweepGradientShader
 import androidx.compose.ui.graphics.isSpecified
 import androidx.compose.ui.graphics.toPixelMap
-import androidx.compose.ui.input.pointer.consumePositionChange
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.style.TextAlign
@@ -106,7 +105,7 @@ public fun ColorPicker(
             val down = awaitFirstDown()
             update(down.position)
             drag(down.id) { change ->
-              change.consumePositionChange()
+              change.consume()
               update(change.position)
             }
           }
@@ -223,10 +222,13 @@ private fun MagnifierTransition(
  * Label representing the currently selected [color], with [Text] representing the hex code and a
  * square at the start showing the [color].
  */
-@OptIn(ExperimentalStdlibApi::class)
 @Composable
-private fun MagnifierLabel(modifier: Modifier, options: ColorPicker.Magnifier.Options, color: Color) {
-  Surface(shape = options.popupShape, elevation = 4.dp) {
+private fun MagnifierLabel(
+  modifier: Modifier,
+  options: ColorPicker.Magnifier.Options,
+  color: Color
+) {
+  Surface(shape = options.popupShape) {
     Row(modifier) {
       Box(Modifier.weight(options.colorWidthWeight).fillMaxHeight().background(color))
       val text = "#" + color.toHexString().uppercase().let { hex ->
@@ -260,7 +262,6 @@ private fun MagnifierSelectionCircle(modifier: Modifier, color: Color) {
   Surface(
     modifier,
     shape = CircleShape,
-    elevation = 4.dp,
     color = color,
     border = BorderStroke(2.dp, SolidColor(Color.Black.copy(alpha = 0.75f))),
     content = {}

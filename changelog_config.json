@@ -19,10 +19,14 @@
     {
       "title": "## \uD83D\uDCD6 Documentation",
       "labels": ["documentation"]
+    },
+    {
+      "title": "\uD83D\uDCE6 Dependencies",
+      "labels": ["dependencies"]
     }
   ],
   "ignore_labels": [
-    "duplicate", "good first issue", "help wanted", "invalid", "question", "wontfix"
+    "duplicate", "good first issue", "help wanted", "invalid", "question", "wontfix", "skip release notes", "hold"
   ],
   "sort": "ASC",
   "template": "${{CHANGELOG}}",
