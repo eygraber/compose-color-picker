@@ -37,7 +37,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-@DelicateCoroutinesApi
+@OptIn(DelicateCoroutinesApi::class)
 @Composable
 fun Sample() {
   SampleCard {
