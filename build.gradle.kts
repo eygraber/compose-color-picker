@@ -1,18 +1,33 @@
 buildscript {
   repositories {
+    google {
+      content {
+        includeGroupByRegex("com\\.google.*")
+        includeGroupByRegex("com\\.android.*")
+        includeGroupByRegex("androidx.*")
+      }
+    }
     mavenCentral()
-    maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+    gradlePluginPortal()
   }
 
   dependencies {
-    classpath("org.jetbrains.compose:compose-gradle-plugin:1.0.0-alpha4-build385")
+    classpath(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
+    classpath(libs.buildscript.android)
+    classpath(libs.buildscript.compose)
+    classpath(libs.buildscript.kotlin)
+    classpath(libs.buildscript.atomicFu)
   }
 }
 
-allprojects {
-  repositories {
-    google()
-    mavenCentral()
-    maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+plugins {
+  base
+}
+
+tasks.named("clean").configure {
+  val buildDir = buildDir
+
+  doFirst {
+    buildDir.deleteRecursively()
   }
 }

@@ -1,57 +1,72 @@
 plugins {
-  id("com.android.application")
   kotlin("android")
-  id("org.jetbrains.compose")
-  detekt
-  `detekt-hotfix`
+  id("com.android.application")
+  id("color-kotlin-library")
+  id("color-detekt")
+  id("color-compose-jetpack")
 }
 
 android {
-  compileSdk = 31
+  namespace = "com.eygraber.compose.colorpicker.sample"
+
+  compileSdk = libs.versions.android.sdk.compile.get().toInt()
 
   defaultConfig {
     applicationId = "com.eygraber.compose.colorpicker.sample"
-    minSdk = 24
-    targetSdk = 31
-    versionCode = 1
-    versionName = "1.0"
-  }
+    targetSdk = libs.versions.android.sdk.target.get().toInt()
+    minSdk = libs.versions.android.sdk.min.get().toInt()
 
-  compileOptions {
-    isCoreLibraryDesugaringEnabled = true
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    versionCode = 1
+    versionName = "1.0.0"
+
+    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    multiDexEnabled = true
   }
 
   buildTypes {
-    getByName("release") {
+    named("release") {
+      isMinifyEnabled = true
+      isShrinkResources = true
+      proguardFiles.clear()
+      proguardFiles += project.file("proguard-rules.pro")
+    }
+
+    named("debug") {
+      applicationIdSuffix = ".debug"
+
+      versionNameSuffix = "-DEBUG"
+
       isMinifyEnabled = false
     }
   }
 
-  kotlinOptions {
-    jvmTarget = "11"
-  }
-}
-
-dependencies {
-  implementation(project(":sample:app"))
-  implementation("androidx.core:core-ktx:1.7.0-beta02")
-  implementation("androidx.appcompat:appcompat:1.4.0-beta01")
-  implementation("androidx.activity:activity-compose:1.4.0-beta01") {
-    exclude(group = "androidx.compose.animation")
-    exclude(group = "androidx.compose.foundation")
-    exclude(group = "androidx.compose.material")
-    exclude(group = "androidx.compose.runtime")
-    exclude(group = "androidx.compose.ui")
-  }
-  implementation("androidx.compose.ui:ui-tooling:1.1.0-alpha05") {
-    exclude(group = "androidx.compose.animation")
-    exclude(group = "androidx.compose.foundation")
-    exclude(group = "androidx.compose.material")
-    exclude(group = "androidx.compose.runtime")
-    exclude(group = "androidx.compose.ui")
+  compileOptions {
+    isCoreLibraryDesugaringEnabled = true
+    sourceCompatibility = JavaVersion.toVersion(libs.versions.jdk.get())
+    targetCompatibility = JavaVersion.toVersion(libs.versions.jdk.get())
   }
 
-  coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
+  @Suppress("UnstableApiUsage")
+  packagingOptions {
+    resources.pickFirsts += "META-INF/*"
+  }
+
+  dependencies {
+    implementation(projects.sample.shared)
+
+    coreLibraryDesugaring(libs.android.desugar)
+
+    with(libs.androidx) {
+      implementation(activity)
+      implementation(activityCompose)
+      implementation(appCompat)
+
+      with(compose) {
+        implementation(foundation)
+        implementation(material3)
+        debugImplementation(uiTooling)
+        implementation(uiToolingPreview)
+      }
+    }
+  }
 }

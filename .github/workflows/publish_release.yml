@@ -1,0 +1,97 @@
+name: Publish a release
+
+on:
+  push:
+    branches:
+      - release
+
+env:
+  VERSION_FILE: gradle.properties
+  VERSION_EXTRACT_PATTERN: '(?<=VERSION_NAME=).+'
+  GH_USER_NAME: github.actor
+  GRADLE_OPTS: -Dorg.gradle.daemon=false -Dkotlin.incremental=false -Dorg.gradle.unsafe.configuration-cache=false -Dorg.gradle.jvmargs="-Xmx4g -Xms128m -XX:MaxPermSize=4096m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8 -XX:MaxMetaspaceSize=1024m"
+
+jobs:
+  publish_release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.PUSH_PAT }}
+
+      - name: Generate versions
+        uses: HardNorth/github-version-generate@v1.3.0
+        with:
+          version-source: file
+          version-file: ${{ env.VERSION_FILE }}
+          version-file-extraction-pattern: ${{ env.VERSION_EXTRACT_PATTERN }}
+
+      - uses: actions/setup-java@v3.6.0
+        with:
+          distribution: 'zulu'
+          java-version: 11
+
+      - uses: gradle/wrapper-validation-action@v1.0.5
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2.3.3
+        with:
+          gradle-version: wrapper
+
+      - name: Publish the artifacts
+        env:
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.SONATYPE_NEXUS_PASSWORD }}
+          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.ARTIFACT_SIGNING_PRIVATE_KEY }}
+        run: ./gradlew publish -PVERSION_NAME=${{ env.RELEASE_VERSION }}
+
+      - name: Create tag
+        id: create_tag
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: "refs/tags/${{ env.RELEASE_VERSION }}",
+              sha: context.sha
+            })
+
+      - name: Build changelog
+        id: build_changelog
+        uses: mikepenz/release-changelog-builder-action@v3
+        with:
+          configuration: "changelog_config.json"
+          toTag: ${{ env.RELEASE_VERSION }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create release
+        id: create_release
+        uses: ncipollo/release-action@v1.11.2
+        with:
+          body: ${{ steps.build_changelog.outputs.changelog }}
+          commit: release
+          name: Release ${{ env.RELEASE_VERSION }}
+          tag: ${{ env.RELEASE_VERSION }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/checkout@v3
+        with:
+          ref: 'master'
+          token: ${{ secrets.PUSH_PAT }}
+
+      - name: Prepare next dev version
+        id: prepare_next_dev
+        run: |
+          sed -i -e 's/${{ env.CURRENT_VERSION }}/${{ env.NEXT_VERSION }}/g' gradle.properties && \
+            sed -i -e 's/${{ env.CURRENT_VERSION }}/${{ env.NEXT_VERSION }}/g' build-logic/gradle.properties && \
+            sed -i -E -e 's/portal(:|\/)${{ env.CURRENT_VERSION }}/portal\1${{ env.NEXT_VERSION }}/g' README.md
+
+      - name: Commit next dev version
+        id: commit_next_dev
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: "['gradle.properties', 'build-logic/gradle.properties', 'README.md']"
+          default_author: github_actions
+          message: "Prepare next dev version"

@@ -1,3 +1,0 @@
-#!/usr/bin/env sh
-
-./gradlew :library:clean :library:build :library:publish $@ --no-daemon --no-parallel
