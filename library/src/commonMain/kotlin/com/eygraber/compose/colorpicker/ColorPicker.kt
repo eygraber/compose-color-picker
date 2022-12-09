@@ -2,6 +2,7 @@ package com.eygraber.compose.colorpicker
 
 import androidx.compose.animation.core.animateDp
 import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.animateOffset
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.BorderStroke
@@ -14,7 +15,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,6 +22,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.GenericShape
@@ -54,6 +55,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import kotlin.math.hypot
 
 @Composable
 public fun ColorPicker(
@@ -69,15 +71,30 @@ public fun ColorPicker(
       .aspectRatio(1F)
   ) {
     val diameter = constraints.maxWidth
+    val radius = diameter / 2F
 
+    var previousDiameter by remember { mutableStateOf(diameter) }
     var selectedPosition by remember { mutableStateOf(Offset.Zero) }
+
+    val isSelectedAndDiameterChanged =
+      selectedPosition != Offset.Zero && diameter != previousDiameter
+
     if(resetSelectedPosition) {
       selectedPosition = Offset.Zero
+    }
+    else if(isSelectedAndDiameterChanged) {
+      selectedPosition = selectedPosition.translate(
+        newDiameter = diameter,
+        oldDiameter = previousDiameter
+      )
+
+      previousDiameter = diameter
     }
 
     val colorWheel = remember(diameter, alpha, brightness) {
       ColorWheel(
         diameter = diameter,
+        radius = radius,
         alpha = alpha,
         brightness = brightness
       ).apply {
@@ -90,13 +107,13 @@ public fun ColorPicker(
 
     val inputModifier = Modifier
       .fillMaxSize()
-      .pointerInput(alpha, brightness) {
+      .pointerInput(diameter, alpha, brightness) {
         fun update(newPosition: Offset) {
-          val color = colorWheel.colorForPosition(newPosition)
-          onColorSelected(color)
-          selectedPosition = when {
-            color.isSpecified -> newPosition
-            else -> Offset.Zero
+          val new = newPosition.clampToCircle(radius)
+          val color = colorWheel.colorForPosition(new)
+          if(color.isSpecified) {
+            onColorSelected(color)
+            selectedPosition = new
           }
         }
 
@@ -112,13 +129,15 @@ public fun ColorPicker(
         }
       }
 
-    Box(inputModifier) {
+    Box(
+      modifier = inputModifier
+    ) {
       Image(contentDescription = null, bitmap = colorWheel.image)
       val color = colorWheel.colorForPosition(selectedPosition)
-      if(magnifier is ColorPicker.Magnifier.Options && color.isSpecified) {
+      if(magnifier is ColorPicker.Magnifier.Options) {
         Magnifier(
           options = magnifier,
-          visible = selectedPosition != Offset.Zero,
+          visible = selectedPosition != Offset.Zero && color.isSpecified,
           position = selectedPosition,
           color = color
         )
@@ -154,32 +173,24 @@ private fun Magnifier(
   position: Offset,
   color: Color
 ) {
-  val offset = with(LocalDensity.current) {
-    Modifier.offset(
-      position.x.toDp() - options.width / 2,
-      // Align with the center of the selection circle
-      position.y.toDp() - (options.height - options.selectionCircleDiameter / 2)
-    )
-  }
   MagnifierTransition(
     visible,
-    options.width,
-    options.selectionCircleDiameter
-  ) { labelWidth: Dp, selectionDiameter: Dp,
-    alpha: Float ->
+    options,
+    position
+  ) { offset: Modifier, labelWidth: Dp, selectionDiameter: Dp, alpha: Float ->
     Column(
-      offset.size(width = options.width, height = options.height)
+      modifier = offset
+        .size(width = options.width, height = options.height)
         .alpha(alpha)
     ) {
       Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
         MagnifierLabel(Modifier.size(labelWidth, options.labelHeight), options, color)
       }
-      Spacer(Modifier.weight(1f))
       Box(
         Modifier.fillMaxWidth().height(options.selectionCircleDiameter),
         contentAlignment = Alignment.Center
       ) {
-        MagnifierSelectionCircle(Modifier.size(selectionDiameter), color)
+        MagnifierSelectionCircle(Modifier.requiredSize(selectionDiameter), color)
       }
     }
   }
@@ -192,16 +203,26 @@ private fun Magnifier(
 @Composable
 private fun MagnifierTransition(
   visible: Boolean,
-  maxWidth: Dp,
-  maxDiameter: Dp,
-  content: @Composable (labelWidth: Dp, selectionDiameter: Dp, alpha: Float) -> Unit
+  options: ColorPicker.Magnifier.Options,
+  position: Offset,
+  content: @Composable (
+    offset: Modifier,
+    labelWidth: Dp,
+    selectionDiameter: Dp,
+    alpha: Float
+  ) -> Unit
 ) {
   val transition = updateTransition(visible)
+
+  val offset by transition.animateOffset(transitionSpec = { tween() }) {
+    if(it) position else Offset.Zero
+  }
+
   val labelWidth by transition.animateDp(transitionSpec = { tween() }) {
-    if(it) maxWidth else 0.dp
+    if(it) options.width else 0.dp
   }
   val magnifierDiameter by transition.animateDp(transitionSpec = { tween() }) {
-    if(it) maxDiameter else 0.dp
+    if(it) options.selectionCircleDiameter else 0.dp
   }
   val alpha by transition.animateFloat(
     transitionSpec = {
@@ -215,7 +236,22 @@ private fun MagnifierTransition(
   ) {
     if(it) 1f else 0f
   }
-  content(labelWidth, magnifierDiameter, alpha)
+
+  val offsetX = if(position != Offset.Zero) position.x else offset.x
+  val offsetY = if(position != Offset.Zero) position.y else offset.y
+
+  content(
+    with(LocalDensity.current) {
+      Modifier.offset(
+        offsetX.toDp() - options.width / 2,
+        // Align with the center of the selection circle
+        offsetY.toDp() - (options.height + options.selectionCircleDiameter) / 2
+      )
+    },
+    labelWidth,
+    magnifierDiameter,
+    alpha
+  )
 }
 
 /**
@@ -289,9 +325,12 @@ private val MagnifierPopupShape = GenericShape { size, _ ->
 /**
  * A color wheel with an [ImageBitmap] that draws a circular color wheel of the specified diameter.
  */
-private class ColorWheel(diameter: Int, alpha: Float, brightness: Float) {
-  private val radius = diameter / 2f
-
+private class ColorWheel(
+  diameter: Int,
+  radius: Float,
+  alpha: Float,
+  brightness: Float
+) {
   private fun Color.applyBrightnessAndAlpha(alpha: Float, brightness: Float) =
     copy(
       red = red * brightness,
@@ -349,5 +388,29 @@ private fun ColorWheel.colorForPosition(position: Offset): Color {
   with(image.toPixelMap()) {
     if(x !in 0 until width || y !in 0 until height) return Color.Unspecified
     return this[x, y].takeIf { it.alpha > 0F } ?: Color.Unspecified
+  }
+}
+
+private fun Offset.translate(
+  newDiameter: Int,
+  oldDiameter: Int
+): Offset {
+  val multiplier = newDiameter / oldDiameter.toFloat()
+  return Offset(
+    x = x * multiplier,
+    y = y * multiplier
+  )
+}
+
+private fun Offset.clampToCircle(radius: Float): Offset {
+  val dx = x - radius
+  val dy = y - radius
+  val d = hypot(dx, dy)
+  return when {
+    d > radius -> Offset(
+      x = radius + dx * (radius - 2) / d,
+      y = radius + dy * (radius - 2) / d
+    )
+    else -> this
   }
 }
