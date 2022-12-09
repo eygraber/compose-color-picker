@@ -39,8 +39,12 @@ import kotlinx.coroutines.launch
 
 @OptIn(DelicateCoroutinesApi::class)
 @Composable
-fun Sample() {
-  SampleCard {
+fun Sample(
+  modifier: Modifier = Modifier
+) {
+  SampleCard(
+    modifier = modifier
+  ) {
     val defaultColor = MaterialTheme.colorScheme.onSurface
 
     var selectedColor by remember { mutableStateOf(defaultColor) }
@@ -174,13 +178,14 @@ private fun ColumnScope.Controls(
 
 @Composable
 private fun SampleCard(
+  modifier: Modifier = Modifier,
   content: @Composable BoxScope.() -> Unit
 ) {
   MaterialTheme(
     colorScheme = darkColorScheme()
   ) {
     Box(
-      modifier = Modifier
+      modifier = modifier
         .fillMaxSize()
         .background(
           color = MaterialTheme.colorScheme.background

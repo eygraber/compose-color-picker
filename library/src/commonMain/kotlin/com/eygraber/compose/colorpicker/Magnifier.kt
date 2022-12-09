@@ -1,5 +1,6 @@
 package com.eygraber.compose.colorpicker
 
+import androidx.compose.animation.core.Transition
 import androidx.compose.animation.core.animateDp
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.animateOffset
@@ -55,13 +56,23 @@ internal fun Magnifier(
         .alpha(alpha)
     ) {
       Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-        MagnifierLabel(Modifier.size(labelWidth, options.labelHeight), options, color)
+        MagnifierLabel(
+          options,
+          color,
+          modifier = Modifier
+            .size(labelWidth, options.labelHeight)
+        )
       }
       Box(
-        Modifier.fillMaxWidth().height(options.selectionCircleDiameter),
+        modifier = Modifier
+          .fillMaxWidth()
+          .height(options.selectionCircleDiameter),
         contentAlignment = Alignment.Center
       ) {
-        MagnifierSelectionCircle(Modifier.requiredSize(selectionDiameter), color)
+        MagnifierSelectionCircle(
+          color,
+          Modifier.requiredSize(selectionDiameter)
+        )
       }
     }
   }
@@ -131,9 +142,9 @@ private fun MagnifierTransition(
  */
 @Composable
 private fun MagnifierLabel(
-  modifier: Modifier,
   options: ColorPicker.Magnifier.Options,
-  color: Color
+  color: Color,
+  modifier: Modifier = Modifier
 ) {
   Surface(shape = options.popupShape) {
     Row(modifier) {
@@ -156,7 +167,10 @@ private fun MagnifierLabel(
  * Selection circle drawn over the currently selected pixel of the color wheel.
  */
 @Composable
-private fun MagnifierSelectionCircle(modifier: Modifier, color: Color) {
+private fun MagnifierSelectionCircle(
+  color: Color,
+  modifier: Modifier = Modifier
+) {
   Surface(
     modifier,
     shape = CircleShape,
