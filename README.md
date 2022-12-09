@@ -8,6 +8,6 @@ repositories {
 }
 
 dependencies {
-  implementation("com.eygraber:compose-color-picker:0.0.3")
+  implementation("com.eygraber:compose-color-picker:0.0.4")
 }
 ```
