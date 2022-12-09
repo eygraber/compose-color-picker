@@ -4,10 +4,10 @@ Based on the [ColorPickerDemo](https://cs.android.com/androidx/platform/framewor
 
 ```
 repositories {
-  maven { url "https://s01.oss.sonatype.org/content/repositories/snapshots" }
+  mavenCentral()
 }
 
 dependencies {
-  implementation "com.eygraber:compose-color-picker:0.0.1-SNAPSHOT"
+  implementation("com.eygraber:compose-color-picker:0.0.3")
 }
 ```

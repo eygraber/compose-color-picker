@@ -85,8 +85,7 @@ jobs:
         id: prepare_next_dev
         run: |
           sed -i -e 's/${{ env.CURRENT_VERSION }}/${{ env.NEXT_VERSION }}/g' gradle.properties && \
-            sed -i -e 's/${{ env.CURRENT_VERSION }}/${{ env.NEXT_VERSION }}/g' build-logic/gradle.properties && \
-            sed -i -E -e 's/portal(:|\/)${{ env.CURRENT_VERSION }}/portal\1${{ env.NEXT_VERSION }}/g' README.md
+            sed -i -E -e 's/compose-color-picker(:|\/)[0-9]+\.[0-9]+\.[0-9]+/compose-color-picker\1${{ env.RELEASE_VERSION }}/g' README.md
 
       - name: Commit next dev version
         id: commit_next_dev
