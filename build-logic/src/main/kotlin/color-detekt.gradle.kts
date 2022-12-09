@@ -29,9 +29,9 @@ tasks.withType<Detekt>().configureEach {
   }
 }
 
-@Suppress("UnstableApiUsage")
 dependencies {
   detektPlugins(libs.detekt.formatting)
+  detektPlugins(libs.detektCompose)
   detektPlugins(libs.detektEygraber.formatting)
   detektPlugins(libs.detektEygraber.style)
 }
