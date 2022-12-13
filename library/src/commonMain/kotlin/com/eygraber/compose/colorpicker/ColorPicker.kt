@@ -73,7 +73,8 @@ public fun ColorPicker(
         brightness = brightness
       ).apply {
         val currentColor = colorForPosition(selectedPosition)
-        if(currentColor.isSpecified) {
+        if(currentColor.isSpecified && currentColor != selectedColor) {
+          selectedColor = currentColor
           onColorSelected(currentColor)
         }
       }
