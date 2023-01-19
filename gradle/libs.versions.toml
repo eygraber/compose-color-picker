@@ -25,7 +25,7 @@ jdk = "11"
 kodein = "7.18.0"
 kotlin = "1.8.0"
 
-kotlinInject = "0.5.1"
+kotlinInject = "0.6.0"
 
 kotest = "5.5.4"
 
