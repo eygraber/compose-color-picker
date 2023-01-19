@@ -1,8 +1,8 @@
 plugins {
   kotlin("jvm")
-  id("color-compose-jetbrains")
-  id("color-kotlin-library")
-  id("color-detekt")
+  id("com.eygraber.conventions-compose-jetbrains")
+  id("com.eygraber.conventions-kotlin-library")
+  id("com.eygraber.conventions-detekt")
 }
 
 kotlin {

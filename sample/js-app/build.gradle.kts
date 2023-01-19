@@ -1,19 +1,16 @@
-import com.eygraber.colorpicker.gradle.colorTargets
 import org.jetbrains.compose.ExperimentalComposeLibrary
 
 plugins {
-  id("color-kotlin-multiplatform")
-  id("color-detekt")
-  id("color-compose-jetbrains")
+  id("com.eygraber.conventions-kotlin-multiplatform")
+  id("com.eygraber.conventions-detekt")
+  id("com.eygraber.conventions-compose-jetbrains")
 }
 
 kotlin {
-  colorTargets(
+  kmpTargets(
+    project = project,
     js = true,
-    isJsLeafModule = true,
-    android = false,
-    jvm = false,
-    ios = false
+    isJsLeafModule = true
   )
 
   sourceSets {

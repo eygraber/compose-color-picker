@@ -1,9 +1,9 @@
 plugins {
   kotlin("android")
   id("com.android.application")
-  id("color-kotlin-library")
-  id("color-detekt")
-  id("color-compose-jetpack")
+  id("com.eygraber.conventions-kotlin-library")
+  id("com.eygraber.conventions-detekt")
+  id("com.eygraber.conventions-compose-jetpack")
 }
 
 android {
@@ -47,7 +47,7 @@ android {
   }
 
   @Suppress("UnstableApiUsage")
-  packagingOptions {
+  packaging {
     resources.pickFirsts += "META-INF/*"
   }
 

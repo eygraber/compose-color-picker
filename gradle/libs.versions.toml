@@ -1,5 +1,5 @@
 [versions]
-agp = "8.0.0-alpha09"
+agp = "8.0.0-beta01"
 
 android-sdk-compile = "33"
 android-sdk-target = "33"
@@ -8,9 +8,11 @@ android-sdk-min = "24"
 androidx-activity = "1.6.1"
 androidx-core = "1.9.0"
 
-composeAndroid-bom = "2022.11.00"
-composeAndroid-compiler = "1.4.0-alpha02"
-composeJetbrains = "1.3.0-beta03"
+composeAndroid-bom = "2023.01.00"
+composeAndroid-compiler = "1.4.0"
+composeJetbrains = "1.3.0-rc02"
+
+conventions = "0.0.29"
 
 detekt = "1.22.0"
 detektCompose = "0.0.26"
@@ -20,28 +22,19 @@ dokka = "1.7.20"
 
 jdk = "11"
 
-kodein = "7.16.0"
-kotlin = "1.7.21"
+kodein = "7.18.0"
+kotlin = "1.8.0"
 
 kotlinInject = "0.5.1"
-
-ksp = "1.7.21-1.0.8"
 
 kotest = "5.5.4"
 
 kotlinx-coroutines = "1.6.4"
-kotlinx-atomicFu = "0.18.5"
 
-publish = "0.22.0"
+publish = "0.23.2"
 
 [plugins]
-agp = { id = "com.android.application", version.ref = "agp" }
-atomicFu = { id = "kotlinx-atomicfu", version.ref = "kotlinx-atomicFu" }
-compose = { id = "org.jetbrains.compose", version.ref = "composeJetbrains" }
-detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
-dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
-kotlin = { id = "kotlin-multiplatform", version.ref = "kotlin" }
-publish = { id = "com.vanniktech.maven.publish", version.ref = "publish" }
+conventions = { id = "com.eygraber.conventions", version.ref = "conventions" }
 
 [libraries]
 android-desugar = "com.android.tools:desugar_jdk_libs:2.0.0"
@@ -61,14 +54,12 @@ composeAndroid-material = { module = "androidx.compose.material:material" }
 composeAndroid-materialIconsExtended = { module = "androidx.compose.material:material-icons-extended" }
 
 buildscript-android = { module = "com.android.tools.build:gradle", version.ref = "agp" }
-buildscript-androidCacheFix = { module = "gradle.plugin.org.gradle.android:android-cache-fix-gradle-plugin", version = "2.6.0" }
-buildscript-atomicFu = { module = "org.jetbrains.kotlinx:atomicfu-gradle-plugin", version.ref = "kotlinx-atomicFu" }
+buildscript-androidCacheFix = { module = "gradle.plugin.org.gradle.android:android-cache-fix-gradle-plugin", version = "2.6.2" }
 buildscript-compose = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "composeJetbrains" }
 buildscript-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
 buildscript-dokka = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka" }
 buildscript-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 buildscript-publish = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "publish" }
-buildscript-ksp = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin", version.ref = "ksp" }
 
 detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 detektCompose = { module = "com.twitter.compose.rules:detekt", version.ref = "detektCompose" }
@@ -77,7 +68,6 @@ detektEygraber-style = { module = "com.eygraber.detekt.rules:style", version.ref
 
 kodein-core = { module = "org.kodein.di:kodein-di", version.ref = "kodein" }
 
-kotlinx-atomicFu = { module = "org.jetbrains.kotlinx:atomicfu", version.ref = "kotlinx-atomicFu" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
@@ -88,9 +78,9 @@ kotlinInject-runtime = { module = "me.tatarka.inject:kotlin-inject-runtime", ver
 
 kotlinDurationExtensions = "com.eygraber:kotlin-duration-extensions:1.1.1"
 
-test-espresso = "androidx.test.espresso:espresso-core:3.5.0"
+test-espresso = "androidx.test.espresso:espresso-core:3.5.1"
 test-compose-android-uiJunit = { module = "androidx.compose.ui:ui-test-junit4" }
 test-compose-android-uiTestManifest = { module = "androidx.compose.ui:ui-test-manifest" }
 test-junit = { module = "junit:junit", version = "4.13.2" }
 test-kotest-assertions = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
-test-robolectric = "org.robolectric:robolectric:4.9"
+test-robolectric = "org.robolectric:robolectric:4.9.2"
