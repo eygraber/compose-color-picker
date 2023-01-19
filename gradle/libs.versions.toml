@@ -25,8 +25,6 @@ jdk = "11"
 kodein = "7.18.0"
 kotlin = "1.8.0"
 
-kotlinInject = "0.5.1"
-
 kotest = "5.5.4"
 
 kotlinx-coroutines = "1.6.4"
@@ -72,9 +70,6 @@ kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-c
 kotlinx-coroutines-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
 kotlinx-serialization-json = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1"
-
-kotlinInject-compiler = { module = "me.tatarka.inject:kotlin-inject-compiler-ksp", version.ref = "kotlinInject" }
-kotlinInject-runtime = { module = "me.tatarka.inject:kotlin-inject-runtime", version.ref = "kotlinInject" }
 
 kotlinDurationExtensions = "com.eygraber:kotlin-duration-extensions:1.1.1"
 
