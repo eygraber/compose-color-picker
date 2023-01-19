@@ -1,11 +1,9 @@
-import com.eygraber.colorpicker.gradle.colorTargets
-
 plugins {
-  id("color-kotlin-multiplatform")
-  id("color-android-library")
-  id("color-compose-jetbrains")
-  id("color-detekt")
-  id("color-publish")
+  id("com.eygraber.conventions-kotlin-multiplatform")
+  id("com.eygraber.conventions-android-library")
+  id("com.eygraber.conventions-compose-jetbrains")
+  id("com.eygraber.conventions-detekt")
+  id("com.eygraber.conventions-publish-maven-central")
 }
 
 android {
@@ -15,10 +13,15 @@ android {
 kotlin {
   explicitApi()
 
-  colorTargets()
+  kmpTargets(
+    project = project,
+    android = true,
+    jvm = true,
+    js = true
+  )
 
   sourceSets {
-    val commonMain by getting {
+    commonMain {
       dependencies {
         implementation(compose.foundation)
         @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
@@ -27,7 +30,7 @@ kotlin {
       }
     }
 
-    val commonTest by getting {
+    commonTest {
       dependencies {
         implementation(kotlin("test-common"))
         implementation(kotlin("test-annotations-common"))
