@@ -18,7 +18,7 @@ detekt = "1.22.0"
 detektCompose = "0.0.26"
 detektEygraber = "1.0.11"
 
-dokka = "1.7.20"
+dokka = "1.8.10"
 
 jdk = "11"
 
