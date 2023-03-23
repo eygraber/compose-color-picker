@@ -29,7 +29,7 @@ kotest = "5.5.5"
 
 kotlinx-coroutines = "1.6.4"
 
-publish = "0.24.0"
+publish = "0.25.0"
 
 [plugins]
 conventions = { id = "com.eygraber.conventions", version.ref = "conventions" }
