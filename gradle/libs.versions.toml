@@ -22,7 +22,7 @@ dokka = "1.8.10"
 
 jdk = "11"
 
-kodein = "7.19.1"
+kodein = "7.20.1"
 kotlin = "1.8.10"
 
 kotest = "5.5.5"
