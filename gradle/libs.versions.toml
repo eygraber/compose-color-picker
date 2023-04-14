@@ -5,7 +5,7 @@ android-sdk-compile = "33"
 android-sdk-target = "33"
 android-sdk-min = "24"
 
-androidx-activity = "1.6.1"
+androidx-activity = "1.7.0"
 androidx-core = "1.9.0"
 
 composeAndroid-bom = "2023.04.00"
