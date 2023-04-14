@@ -4,9 +4,9 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.gestures.awaitEachGesture
 import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.gestures.drag
-import androidx.compose.foundation.gestures.forEachGesture
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.PaddingValues
@@ -96,14 +96,12 @@ public fun ColorPicker(
           }
         }
 
-        forEachGesture {
-          awaitPointerEventScope {
-            val down = awaitFirstDown()
-            update(down.position)
-            drag(down.id) { change ->
-              change.consume()
-              update(change.position)
-            }
+        awaitEachGesture {
+          val down = awaitFirstDown()
+          update(down.position)
+          drag(down.id) { change ->
+            change.consume()
+            update(change.position)
           }
         }
       }
