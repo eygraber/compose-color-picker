@@ -9,7 +9,7 @@ androidx-activity = "1.7.1"
 androidx-core = "1.10.0"
 
 composeAndroid-bom = "2023.04.00"
-composeAndroid-compiler = "1.4.5"
+composeAndroid-compiler = "1.4.6"
 composeJetbrains = "1.4.0"
 
 conventions = "0.0.31"
