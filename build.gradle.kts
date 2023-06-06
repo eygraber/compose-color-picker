@@ -1,7 +1,4 @@
 import com.eygraber.conventions.tasks.deleteRootBuildDirWhenCleaning
-import org.jetbrains.kotlin.config.AnalysisFlags.explicitApiMode
-import org.jetbrains.kotlin.gradle.dsl.ExplicitApiMode
-import org.jetbrains.kotlin.js.translate.context.Namer.kotlin
 
 buildscript {
   dependencies {
@@ -45,7 +42,6 @@ gradleConventionsDefaults {
 
   detekt {
     plugins(
-      libs.detekt.formatting,
       libs.detektCompose,
       libs.detektEygraber.formatting,
       libs.detektEygraber.style

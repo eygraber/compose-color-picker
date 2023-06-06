@@ -151,7 +151,9 @@ public object ColorPicker {
       val showAlphaHex: Boolean = true,
       // more padding on bottom to account for the default shape
       val hexPadding: PaddingValues = PaddingValues(
-        end = 5.dp, top = 10.dp, bottom = 20.dp
+        end = 5.dp,
+        top = 10.dp,
+        bottom = 20.dp
       ),
       val selectionDiameter: Dp = 15.dp,
       val popupShape: GenericShape = MagnifierPopupShape
