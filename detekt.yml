@@ -133,6 +133,8 @@ coroutines:
     active: true
   SleepInsteadOfDelay:
     active: true
+  SuspendFunSwallowedCancellation:
+    active: true
   SuspendFunWithCoroutineScopeReceiver:
     active: true
   SuspendFunWithFlowReturnType:
@@ -234,153 +236,6 @@ exceptions:
       - Throwable
       - RuntimeException
 
-formatting:
-  active: true
-  android: false
-  autoCorrect: true
-  AnnotationOnSeparateLine:
-    active: false
-    autoCorrect: true
-  AnnotationSpacing:
-    active: false
-    autoCorrect: true
-  ArgumentListWrapping:
-    active: false
-    autoCorrect: false
-    indentSize: 2
-    maxLineLength: 120
-  ChainWrapping:
-    active: true
-    autoCorrect: true
-  CommentSpacing:
-    active: true
-    autoCorrect: true
-  EnumEntryNameCase:
-    active: false
-    autoCorrect: true
-  Filename:
-    active: false
-  FunctionReturnTypeSpacing:
-    active: true
-  FunctionSignature:
-    active: false
-  FunctionStartOfBodySpacing:
-    active: true
-  FinalNewline:
-    active: true
-    autoCorrect: true
-    insertFinalNewLine: true
-  ImportOrdering:
-    active: true
-    autoCorrect: true
-  Indentation:
-    active: true
-    autoCorrect: true
-    indentSize: 2
-  MaximumLineLength:
-    active: false # enabled in style.MaxLineLength
-    maxLineLength: 120
-    ignoreBackTickedIdentifier: true
-  NullableTypeSpacing:
-    active: true
-  ParameterListSpacing:
-    active: true
-  SpacingBetweenFunctionNameAndOpeningParenthesis:
-    active: true
-  TypeParameterListSpacing:
-    active: true
-  ModifierOrdering:
-    active: true
-    autoCorrect: true
-  MultiLineIfElse:
-    active: true
-    autoCorrect: true
-  NoBlankLineBeforeRbrace:
-    active: true
-    autoCorrect: true
-  NoConsecutiveBlankLines:
-    active: true
-    autoCorrect: true
-  NoEmptyClassBody:
-    active: true
-    autoCorrect: true
-  NoEmptyFirstLineInMethodBlock:
-    active: true
-    autoCorrect: true
-  NoLineBreakAfterElse:
-    active: true
-    autoCorrect: true
-  NoLineBreakBeforeAssignment:
-    active: true
-    autoCorrect: true
-  NoMultipleSpaces:
-    active: true
-    autoCorrect: true
-  NoSemicolons:
-    active: true
-    autoCorrect: true
-  NoTrailingSpaces:
-    active: true
-    autoCorrect: true
-  NoUnitReturn:
-    active: true
-    autoCorrect: true
-  NoUnusedImports:
-    active: true
-    autoCorrect: true
-  NoWildcardImports:
-    active: true
-    autoCorrect: true
-  PackageName:
-    active: false
-    autoCorrect: true
-  ParameterListWrapping:
-    active: true
-    autoCorrect: true
-    maxLineLength: 120
-  SpacingAroundAngleBrackets:
-    active: true
-    autoCorrect: true
-  SpacingAroundColon:
-    active: true
-    autoCorrect: true
-  SpacingAroundDoubleColon:
-    active: true
-    autoCorrect: true
-  SpacingAroundComma:
-    active: true
-    autoCorrect: true
-  SpacingAroundCurly:
-    active: true
-    autoCorrect: true
-  SpacingAroundDot:
-    active: true
-    autoCorrect: true
-  SpacingAroundKeyword:
-    active: false
-    autoCorrect: true
-  SpacingAroundOperators:
-    active: true
-    autoCorrect: true
-  SpacingAroundParens:
-    active: true
-    autoCorrect: true
-  SpacingAroundRangeOperator:
-    active: true
-    autoCorrect: true
-  SpacingAroundUnaryOperator:
-    active: false
-    autoCorrect: true
-  SpacingBetweenDeclarationsWithAnnotations:
-    active: false
-    autoCorrect: true
-  SpacingBetweenDeclarationsWithComments:
-    active: false
-    autoCorrect: true
-  StringTemplate:
-    active: true
-    autoCorrect: true
-
 formatting-eygraber:
   NoWhitespaceAfterKeyword:
     active: true
@@ -400,7 +255,6 @@ naming:
     parameterPattern: '[a-z][A-Za-z0-9]*'
     privateParameterPattern: '[a-z][A-Za-z0-9]*'
     excludeClassPattern: '$^'
-    ignoreOverridden: true
   EnumNaming:
     active: true
     excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
@@ -422,14 +276,12 @@ naming:
     excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
     functionPattern: '^([[a-z][A-Z]$][a-zA-Z$0-9]*)|(`.*`)$'
     excludeClassPattern: '$^'
-    ignoreOverridden: true
     ignoreAnnotated: ['Composable']
   FunctionParameterNaming:
     active: true
     excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
     parameterPattern: '[a-z][A-Za-z0-9]*'
     excludeClassPattern: '$^'
-    ignoreOverridden: true
   InvalidPackageDeclaration:
     active: true
     excludes: ['**/*.kts']
@@ -477,7 +329,6 @@ naming:
     variablePattern: '[a-z][A-Za-z0-9]*'
     privateVariablePattern: '(_)?[a-z][A-Za-z0-9]*'
     excludeClassPattern: '$^'
-    ignoreOverridden: true
 
 performance:
   active: true
@@ -499,6 +350,8 @@ performance:
 potential-bugs:
   active: true
   AvoidReferentialEquality:
+    active: true
+  CastNullableToNonNullableType:
     active: true
   CastToNullableType:
     active: false
@@ -548,6 +401,8 @@ potential-bugs:
     active: true
   NullableToStringCall:
     active: false
+  PropertyUsedBeforeDeclaration:
+    active: true
   UnconditionalJumpStatementInLoop:
     active: true
   UnnecessaryNotNullCheck:
@@ -575,6 +430,12 @@ style:
   active: true
   AlsoCouldBeApply:
     active: true
+  BracesOnIfStatements:
+    active: true
+  BracesOnWhenStatements:
+    active: true
+    singleLine: 'necessary'
+    multiLine: 'necessary'
   ClassOrdering:
     active: false
   CollapsibleIfStatements:
@@ -591,6 +452,8 @@ style:
   DestructuringDeclarationWithTooManyEntries:
     active: false
     maxDestructuringEntries: 3
+  DoubleNegativeLambda:
+    active: true
   EqualsNullCall:
     active: true
   EqualsOnSignatureLine:
@@ -602,9 +465,11 @@ style:
   ExpressionBodySyntax:
     active: true
     includeLineWrapping: true
+  ForbiddenAnnotation:
+    active: true
   ForbiddenComment:
     active: true
-    values: ['FIXME', 'STOPSHIP']
+    comments: ['FIXME', 'STOPSHIP']
   ForbiddenImport:
     active: false
     imports: []
@@ -642,18 +507,13 @@ style:
     ignoreEnums: false
     ignoreRanges: false
     ignoreExtensionFunctions: true
-  MandatoryBracesIfStatements:
-    active: true
   MandatoryBracesLoops:
     active: true
   MaxChainedCallsOnSameLine:
     active: true
   MaxLineLength:
-    active: true
+    active: false # handled by ktlint
     maxLineLength: 120
-    excludePackageStatements: true
-    excludeImportStatements: true
-    excludeCommentStatements: true
   MayBeConst:
     active: true
   ModifierOrder:
@@ -702,6 +562,8 @@ style:
     active: true
   SpacingBetweenPackageAndImports:
     active: true
+  StringShouldBeRawString:
+    active: false
   ThrowsCount:
     active: true
     max: 3
@@ -722,6 +584,8 @@ style:
     active: true
   UnnecessaryBackticks:
     active: true
+  UnnecessaryBracesAroundTrailingLambda:
+    active: true
   UnnecessaryFilter:
     active: false
   UnnecessaryInheritance:
@@ -736,11 +600,15 @@ style:
     active: true
   UnusedImports:
     active: true
+  UnusedParameter:
+    active: true
   UnusedPrivateClass:
     active: true
   UnusedPrivateMember:
     active: false
     allowedNames: '(_|ignored|expected|serialVersionUID)'
+  UnusedPrivateProperty:
+    active: true
   UseAnyOrNoneInsteadOfFind:
     active: true
   UseArrayLiteralsInAnnotations:
@@ -760,6 +628,8 @@ style:
   UseIfInsteadOfWhen:
     active: false
   UseIsNullOrEmpty:
+    active: true
+  UseLet:
     active: true
   UseOrEmpty:
     active: true
@@ -784,3 +654,45 @@ style-eygraber:
   NewlineForMultilineKeyword:
     active: true
     autoCorrect: true
+
+Compose:
+  CompositionLocalAllowlist:
+    active: false
+  ContentEmitterReturningValues:
+    active: true
+    # You can optionally add your own composables here
+    # contentEmitters: MyComposable,MyOtherComposable
+  ModifierComposable:
+    active: true
+  ModifierMissing:
+    active: true
+  ModifierReused:
+    active: true
+  ModifierWithoutDefault:
+    active: true
+  MultipleEmitters:
+    active: true
+    # You can optionally add your own composables here
+    # contentEmitters: MyComposable,MyOtherComposable
+  MutableParams:
+    active: true
+  ComposableNaming:
+    active: true
+    # You can optionally disable the checks in this rule for regex matches against the composable name (e.g. molecule presenters)
+    # allowedComposableFunctionNames: .*Presenter,.*MoleculePresenter
+  ComposableParamOrder:
+    active: true
+  PreviewNaming:
+    active: true
+  PreviewPublic:
+    active: true
+    # You can optionally disable that only previews with @PreviewParameter are flagged
+    # previewPublicOnlyIfParams: false
+  RememberMissing:
+    active: true
+  UnstableCollections:
+    active: true
+  ViewModelForwarding:
+    active: true
+  ViewModelInjection:
+    active: true

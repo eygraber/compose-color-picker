@@ -1,3 +1,4 @@
 #!/bin/sh
 
+./format
 ./gradlew detektJvmMain detektJsMain detektDebug detektMetadataMain
