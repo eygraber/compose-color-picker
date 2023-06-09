@@ -15,7 +15,7 @@ composeJetbrains = "1.4.0"
 conventions = "0.0.33"
 
 detekt = "1.23.0"
-detektCompose = "0.1.8"
+detektCompose = "0.1.9"
 detektEygraber = "1.0.11"
 
 dokka = "1.8.20"
