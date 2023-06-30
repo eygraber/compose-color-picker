@@ -9,7 +9,7 @@ androidx-activity = "1.7.2"
 androidx-core = "1.10.1"
 
 composeAndroid-bom = "2023.05.00"
-composeAndroid-compiler = "1.4.7"
+composeAndroid-compiler = "1.4.8"
 composeJetbrains = "1.4.1"
 
 conventions = "0.0.34"
@@ -23,7 +23,7 @@ dokka = "1.8.20"
 jdk = "11"
 
 kodein = "7.20.2"
-kotlin = "1.8.21"
+kotlin = "1.8.22"
 
 kotest = "5.6.2"
 
