@@ -139,7 +139,7 @@ public object ColorPicker {
   @Immutable
   public sealed class Magnifier {
     @Immutable
-    public object None : Magnifier()
+    public data object None : Magnifier()
 
     @Immutable
     public data class Default(
