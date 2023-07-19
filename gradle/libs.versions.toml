@@ -1,5 +1,5 @@
 [versions]
-agp = "8.1.0-rc01"
+agp = "8.2.0-alpha13"
 
 android-sdk-compile = "33"
 android-sdk-target = "33"
@@ -9,8 +9,8 @@ androidx-activity = "1.7.2"
 androidx-core = "1.10.1"
 
 composeAndroid-bom = "2023.05.00"
-composeAndroid-compiler = "1.4.8"
-composeJetbrains = "1.4.1"
+composeAndroid-compiler = "1.5.0"
+composeJetbrains = "1.5.0-dev1104"
 
 conventions = "0.0.39"
 
@@ -23,7 +23,7 @@ dokka = "1.8.20"
 jdk = "11"
 
 kodein = "7.20.2"
-kotlin = "1.8.22"
+kotlin = "1.9.0"
 
 kotest = "5.6.2"
 
