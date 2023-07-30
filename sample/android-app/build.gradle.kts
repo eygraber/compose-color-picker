@@ -44,7 +44,6 @@ android {
     isCoreLibraryDesugaringEnabled = true
   }
 
-  @Suppress("UnstableApiUsage")
   packaging {
     resources.pickFirsts += "META-INF/*"
   }

@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-  namespace = "com.eygraber.compose.colorpicker.sample"
+  namespace = "com.eygraber.compose.colorpicker.sample.shared"
 }
 
 kotlin {
