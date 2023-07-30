@@ -23,6 +23,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -48,8 +49,8 @@ fun Sample(
     val defaultColor = MaterialTheme.colorScheme.onSurface
 
     var selectedColor by remember { mutableStateOf(defaultColor) }
-    var alpha by remember { mutableStateOf(1F) }
-    var brightness by remember { mutableStateOf(1F) }
+    var alpha by remember { mutableFloatStateOf(1F) }
+    var brightness by remember { mutableFloatStateOf(1F) }
     var resetSelectedPosition by remember { mutableStateOf(false) }
 
     Column(

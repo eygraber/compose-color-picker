@@ -15,6 +15,7 @@ import androidx.compose.foundation.shape.GenericShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -42,7 +43,7 @@ public fun ColorPicker(
     val diameter = constraints.maxWidth
     val radius = diameter / 2F
 
-    var previousDiameter by remember { mutableStateOf(diameter) }
+    var previousDiameter by remember { mutableIntStateOf(diameter) }
     var selectedPosition by remember { mutableStateOf(Offset.Zero) }
     var selectedPositionBeforeReset by remember { mutableStateOf(Offset.Zero) }
     var selectedColor by remember { mutableStateOf(Color.Unspecified) }
