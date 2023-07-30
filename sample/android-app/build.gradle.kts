@@ -42,8 +42,6 @@ android {
 
   compileOptions {
     isCoreLibraryDesugaringEnabled = true
-    sourceCompatibility = JavaVersion.toVersion(libs.versions.jdk.get())
-    targetCompatibility = JavaVersion.toVersion(libs.versions.jdk.get())
   }
 
   @Suppress("UnstableApiUsage")

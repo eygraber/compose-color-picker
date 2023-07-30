@@ -18,12 +18,11 @@ kotlin {
   )
 
   sourceSets {
-    val commonMain by getting {
+    commonMain {
       dependencies {
         implementation(projects.library)
 
         api(compose.foundation)
-        @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
         api(compose.material3)
         api(compose.runtime)
       }

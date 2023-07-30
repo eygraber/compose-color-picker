@@ -1,4 +1,4 @@
-import org.jetbrains.compose.ExperimentalComposeLibrary
+import com.eygraber.conventions.kotlin.kmp.jsMain
 
 plugins {
   id("com.eygraber.conventions-kotlin-multiplatform")
@@ -14,10 +14,9 @@ kotlin {
   )
 
   sourceSets {
-    named("jsMain") {
+    jsMain {
       dependencies {
         implementation(compose.foundation)
-        @OptIn(ExperimentalComposeLibrary::class)
         implementation(compose.material3)
 
         implementation(projects.sample.shared)
