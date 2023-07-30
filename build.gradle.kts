@@ -47,5 +47,7 @@ gradleConventionsDefaults {
     )
   }
 
-  kotlin(jvmTargetVersion = JvmTarget.JVM_11) {}
+  kotlin {
+    jvmTargetVersion = JvmTarget.JVM_11
+  }
 }
