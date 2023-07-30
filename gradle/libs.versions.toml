@@ -10,7 +10,7 @@ androidx-core = "1.10.1"
 
 composeAndroid-bom = "2023.05.00"
 composeAndroid-compiler = "1.5.1"
-composeJetbrains = "1.5.0-dev1104"
+composeJetbrains = "1.5.0-beta01"
 
 conventions = "0.0.39"
 
