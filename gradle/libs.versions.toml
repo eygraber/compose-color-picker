@@ -8,19 +8,15 @@ android-sdk-min = "24"
 androidx-activity = "1.7.2"
 androidx-core = "1.10.1"
 
-composeAndroid-bom = "2023.05.00"
-composeAndroid-compiler = "1.5.1"
-composeJetbrains = "1.5.0-dev1104"
+composeJetbrains = "1.5.0-beta01"
 
-conventions = "0.0.39"
+conventions = "0.0.41"
 
 detekt = "1.23.1"
 detektCompose = "0.1.13"
 detektEygraber = "1.0.11"
 
 dokka = "1.8.20"
-
-jdk = "11"
 
 kodein = "7.20.2"
 kotlin = "1.9.0"
@@ -49,10 +45,6 @@ androidx-compose-uiTooling = { module = "androidx.compose.ui:ui-tooling" }
 androidx-compose-uiToolingPreview = { module = "androidx.compose.ui:ui-tooling-preview" }
 androidx-core = { module = "androidx.core:core-ktx", version.ref = "androidx-core" }
 
-composeAndroid-compiler = { module = "androidx.compose.compiler:compiler", version.ref = "composeAndroid-compiler" }
-composeAndroid-material = { module = "androidx.compose.material:material" }
-composeAndroid-materialIconsExtended = { module = "androidx.compose.material:material-icons-extended" }
-
 buildscript-android = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 buildscript-androidCacheFix = { module = "gradle.plugin.org.gradle.android:android-cache-fix-gradle-plugin", version = "2.7.2" }
 buildscript-compose = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "composeJetbrains" }
@@ -60,6 +52,9 @@ buildscript-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugi
 buildscript-dokka = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka" }
 buildscript-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 buildscript-publish = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "publish" }
+
+compose-compilerJetbrains = "org.jetbrains.compose.compiler:compiler:1.5.0"
+compose-compilerJetpack = "androidx.compose.compiler:compiler:1.5.1"
 
 detektCompose = { module = "io.nlopez.compose.rules:detekt", version.ref = "detektCompose" }
 detektEygraber-formatting = { module = "com.eygraber.detekt.rules:formatting", version.ref = "detektEygraber" }

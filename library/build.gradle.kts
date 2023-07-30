@@ -24,7 +24,6 @@ kotlin {
     commonMain {
       dependencies {
         implementation(compose.foundation)
-        @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
         implementation(compose.material3)
         implementation(compose.runtime)
       }
