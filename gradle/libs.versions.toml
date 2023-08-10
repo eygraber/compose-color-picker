@@ -13,7 +13,7 @@ composeJetbrains = "1.5.0-beta01"
 conventions = "0.0.48"
 
 detekt = "1.23.1"
-detektCompose = "0.1.13"
+detektCompose = "0.2.1"
 detektEygraber = "1.0.11"
 
 dokka = "1.8.20"
