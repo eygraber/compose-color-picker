@@ -15,7 +15,9 @@ kotlin {
 
   kmpTargets(
     project = project,
+    useDefaultTargetHierarchy = true,
     android = true,
+    ios = true,
     jvm = true,
     js = true
   )
