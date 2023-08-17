@@ -19,7 +19,8 @@ kotlin {
     android = true,
     ios = true,
     jvm = true,
-    js = true
+    js = true,
+    wasmJs = true
   )
 
   sourceSets {
@@ -31,11 +32,11 @@ kotlin {
       }
     }
 
-    commonTest {
-      dependencies {
-        implementation(kotlin("test-common"))
-        implementation(kotlin("test-annotations-common"))
-      }
-    }
+    // commonTest {
+    //   dependencies {
+    //     implementation(kotlin("test-common"))
+    //     implementation(kotlin("test-annotations-common"))
+    //   }
+    // }
   }
 }
