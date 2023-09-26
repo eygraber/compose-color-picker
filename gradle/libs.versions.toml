@@ -10,7 +10,7 @@ androidx-core = "1.12.0"
 
 composeJetbrains = "1.5.2"
 
-conventions = "0.0.51"
+conventions = "0.0.52"
 
 detekt = "1.23.1"
 detektCompose = "0.3.0"
