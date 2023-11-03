@@ -8,7 +8,7 @@ android-sdk-min = "24"
 androidx-activity = "1.8.0"
 androidx-core = "1.12.0"
 
-composeJetbrains = "1.5.3"
+composeJetbrains = "1.5.10"
 
 conventions = "0.0.52"
 
