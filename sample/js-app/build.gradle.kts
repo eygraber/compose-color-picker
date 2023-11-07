@@ -1,5 +1,3 @@
-import com.eygraber.conventions.kotlin.kmp.jsMain
-
 plugins {
   id("com.eygraber.conventions-kotlin-multiplatform")
   id("com.eygraber.conventions-detekt")
@@ -10,7 +8,7 @@ kotlin {
   kmpTargets(
     project = project,
     js = true,
-    isJsLeafModule = true
+    binaryType = BinaryType.Executable,
   )
 
   sourceSets {

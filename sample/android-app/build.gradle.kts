@@ -53,17 +53,13 @@ android {
 
     coreLibraryDesugaring(libs.android.desugar)
 
-    with(libs.androidx) {
-      implementation(activity)
-      implementation(activityCompose)
-      implementation(appCompat)
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.activityCompose)
+    implementation(libs.androidx.appCompat)
 
-      with(compose) {
-        implementation(foundation)
-        implementation(material3)
-        debugImplementation(uiTooling)
-        implementation(uiToolingPreview)
-      }
-    }
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.uiTooling)
+    implementation(libs.androidx.compose.uiToolingPreview)
   }
 }
