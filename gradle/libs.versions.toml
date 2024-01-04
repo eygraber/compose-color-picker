@@ -17,7 +17,7 @@ detektEygraber = "1.0.11"
 
 dokka = "1.9.10"
 
-kotlin = "1.9.21"
+kotlin = "1.9.22"
 
 ktlint = "1.1.0"
 
@@ -45,8 +45,7 @@ buildscript-dokka = { module = "org.jetbrains.dokka:dokka-gradle-plugin", versio
 buildscript-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 buildscript-publish = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "publish" }
 
-compose-compilerJetbrains = "org.jetbrains.compose.compiler:compiler:1.5.4"
-compose-compilerJetpack = "androidx.compose.compiler:compiler:1.5.7"
+compose-compilerJetbrains = "org.jetbrains.compose.compiler:compiler:1.5.7.1"
 
 detektCompose = { module = "io.nlopez.compose.rules:detekt", version.ref = "detektCompose" }
 detektEygraber-formatting = { module = "com.eygraber.detekt.rules:formatting", version.ref = "detektEygraber" }
