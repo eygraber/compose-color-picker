@@ -47,3 +47,12 @@ gradleConventionsDefaults {
     jvmTargetVersion = JvmTarget.JVM_11
   }
 }
+
+gradleConventionsKmpDefaults {
+  targets(
+    KmpTarget.Android,
+    KmpTarget.Ios,
+    KmpTarget.Js,
+    KmpTarget.Jvm,
+  )
+}

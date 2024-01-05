@@ -6,9 +6,10 @@ plugins {
 
 kotlin {
   kmpTargets(
+    KmpTarget.Js,
     project = project,
-    js = true,
     binaryType = BinaryType.Executable,
+    ignoreDefaultTargets = true,
   )
 
   sourceSets {

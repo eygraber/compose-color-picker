@@ -11,10 +11,11 @@ android {
 
 kotlin {
   kmpTargets(
+    KmpTarget.Android,
+    KmpTarget.Js,
+    KmpTarget.Jvm,
     project = project,
-    android = true,
-    jvm = true,
-    js = true,
+    ignoreDefaultTargets = true,
   )
 
   sourceSets {
