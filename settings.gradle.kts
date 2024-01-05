@@ -45,7 +45,7 @@ dependencyResolutionManagement {
       includeMavenCentral = true,
       includeMavenCentralSnapshots = true,
       includeGoogle = true,
-      includeJetbrainsCompose = true
+      includeJetbrainsCompose = true,
     )
   }
 }

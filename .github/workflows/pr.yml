@@ -34,7 +34,7 @@ jobs:
           gradle-version: wrapper
 
       - name: Run detekt
-        run: ./detekt
+        run: ./format --no-format && ./detekt
 
   detektIos:
     runs-on: macos-latest

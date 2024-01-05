@@ -25,13 +25,13 @@ gradleConventionsDefaults {
     sdkVersions(
       compileSdk = libs.versions.android.sdk.compile,
       targetSdk = libs.versions.android.sdk.target,
-      minSdk = libs.versions.android.sdk.min
+      minSdk = libs.versions.android.sdk.min,
     )
   }
 
   compose {
     multiplatform(
-      compilerOverride = libs.compose.compilerJetbrains
+      compilerOverride = libs.compose.compilerJetbrains,
     )
   }
 
@@ -39,7 +39,7 @@ gradleConventionsDefaults {
     plugins(
       libs.detektCompose,
       libs.detektEygraber.formatting,
-      libs.detektEygraber.style
+      libs.detektEygraber.style,
     )
   }
 
