@@ -18,7 +18,7 @@ kotlin {
     android = true,
     ios = true,
     jvm = true,
-    js = true
+    js = true,
   )
 
   sourceSets {

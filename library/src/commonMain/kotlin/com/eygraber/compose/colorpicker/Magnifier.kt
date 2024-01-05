@@ -39,7 +39,7 @@ internal fun Magnifier(
   transitionData: MagnifierTransitionData,
   magnifier: ColorPicker.Magnifier.Default,
   position: () -> Offset,
-  color: () -> Color
+  color: () -> Color,
 ) {
   val offsetModifier = Modifier.offset {
     val (x, y) = position()
@@ -47,7 +47,7 @@ internal fun Magnifier(
     IntOffset(
       (x - magnifier.width.roundToPx() / 2).toInt(),
       // Align with the center of the selection circle
-      (y - (magnifier.height.roundToPx() + magnifier.selectionDiameter.roundToPx()) / 2).toInt()
+      (y - (magnifier.height.roundToPx() + magnifier.selectionDiameter.roundToPx()) / 2).toInt(),
     )
   }
 
@@ -56,16 +56,16 @@ internal fun Magnifier(
     modifier = offsetModifier
       .requiredHeight(magnifier.height)
       .requiredWidth(magnifier.width)
-      .alpha(transitionData.alpha)
+      .alpha(transitionData.alpha),
   ) {
     MagnifierPill(
       magnifier,
       color,
-      modifier = Modifier.width(transitionData.pillWidth)
+      modifier = Modifier.width(transitionData.pillWidth),
     )
 
     MagnifierSelectionCircle(
-      modifier = Modifier.requiredSize(transitionData.selectionDiameter)
+      modifier = Modifier.requiredSize(transitionData.selectionDiameter),
     )
   }
 }
@@ -78,11 +78,11 @@ internal fun Magnifier(
 private fun MagnifierPill(
   options: ColorPicker.Magnifier.Default,
   colorProvider: () -> Color,
-  modifier: Modifier = Modifier
+  modifier: Modifier = Modifier,
 ) {
   Surface(
     modifier = modifier,
-    shape = options.popupShape
+    shape = options.popupShape,
   ) {
     Row {
       Box(
@@ -91,7 +91,7 @@ private fun MagnifierPill(
           .weight(options.pillColorWidthWeight)
           .drawBehind {
             drawRect(colorProvider())
-          }
+          },
       )
 
       MagnifierLabel(options, colorProvider)
@@ -112,7 +112,7 @@ private fun RowScope.MagnifierLabel(
       .weight(options.pillHexWidthWeight)
       .padding(options.hexPadding),
     style = textStyle,
-    maxLines = 1
+    maxLines = 1,
   )
 }
 
@@ -121,7 +121,7 @@ private fun RowScope.MagnifierLabel(
  */
 @Composable
 private fun MagnifierSelectionCircle(
-  modifier: Modifier = Modifier
+  modifier: Modifier = Modifier,
 ) {
   Box(
     modifier = modifier
@@ -129,8 +129,8 @@ private fun MagnifierSelectionCircle(
       .background(Color.Transparent)
       .border(
         border = BorderStroke(2.dp, SolidColor(Color.Black.copy(alpha = 0.75f))),
-        shape = CircleShape
-      )
+        shape = CircleShape,
+      ),
   )
 }
 

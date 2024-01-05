@@ -16,12 +16,12 @@ internal fun Color.toHexString(includeAlpha: Boolean = true): String = buildStri
 
 internal fun Offset.translate(
   newDiameter: Int,
-  oldDiameter: Int
+  oldDiameter: Int,
 ): Offset {
   val multiplier = newDiameter / oldDiameter.toFloat()
   return Offset(
     x = x * multiplier,
-    y = y * multiplier
+    y = y * multiplier,
   )
 }
 
@@ -32,7 +32,7 @@ internal fun Offset.clampToCircle(radius: Float): Offset {
   return when {
     d > radius -> Offset(
       x = radius + dx * (radius - 2) / d,
-      y = radius + dy * (radius - 2) / d
+      y = radius + dy * (radius - 2) / d,
     )
     else -> this
   }

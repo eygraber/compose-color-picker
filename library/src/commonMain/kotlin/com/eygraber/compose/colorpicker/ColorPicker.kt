@@ -34,11 +34,11 @@ public fun ColorPicker(
   brightness: Float = 1F,
   magnifier: ColorPicker.Magnifier = ColorPicker.Magnifier.Default(),
   resetSelectedPosition: Boolean = false,
-  onColorSelected: (Color) -> Unit
+  onColorSelected: (Color) -> Unit,
 ) {
   BoxWithConstraints(
     modifier = modifier
-      .aspectRatio(1F)
+      .aspectRatio(1F),
   ) {
     val diameter = constraints.maxWidth
     val radius = diameter / 2F
@@ -60,7 +60,7 @@ public fun ColorPicker(
     else if(isSelectedAndDiameterChanged) {
       selectedPosition = selectedPosition.translate(
         newDiameter = diameter,
-        oldDiameter = previousDiameter
+        oldDiameter = previousDiameter,
       )
 
       previousDiameter = diameter
@@ -71,7 +71,7 @@ public fun ColorPicker(
         diameter = diameter,
         radius = radius,
         alpha = alpha,
-        brightness = brightness
+        brightness = brightness,
       ).apply {
         val currentColor = colorForPosition(selectedPosition)
         if(currentColor.isSpecified && currentColor != selectedColor) {
@@ -108,7 +108,7 @@ public fun ColorPicker(
       }
 
     Box(
-      modifier = inputModifier
+      modifier = inputModifier,
     ) {
       Image(contentDescription = null, bitmap = colorWheel.image)
 
@@ -117,7 +117,7 @@ public fun ColorPicker(
         AnimatedVisibility(
           visible = isMagnifierVisible,
           enter = EnterTransition.None,
-          exit = ExitTransition.None
+          exit = ExitTransition.None,
         ) {
           Magnifier(
             transitionData = updateMagnifierTransitionData(magnifier),
@@ -128,7 +128,7 @@ public fun ColorPicker(
                 else -> selectedPosition
               }
             },
-            color = { selectedColor }
+            color = { selectedColor },
           )
         }
       }
@@ -154,10 +154,10 @@ public object ColorPicker {
       val hexPadding: PaddingValues = PaddingValues(
         end = 5.dp,
         top = 10.dp,
-        bottom = 20.dp
+        bottom = 20.dp,
       ),
       val selectionDiameter: Dp = 15.dp,
-      val popupShape: GenericShape = MagnifierPopupShape
+      val popupShape: GenericShape = MagnifierPopupShape,
     ) : Magnifier()
   }
 }

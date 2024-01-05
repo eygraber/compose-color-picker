@@ -41,10 +41,10 @@ import kotlinx.coroutines.launch
 @OptIn(DelicateCoroutinesApi::class)
 @Composable
 fun Sample(
-  modifier: Modifier = Modifier
+  modifier: Modifier = Modifier,
 ) {
   SampleCard(
-    modifier = modifier
+    modifier = modifier,
   ) {
     val defaultColor = MaterialTheme.colorScheme.onSurface
 
@@ -55,7 +55,7 @@ fun Sample(
 
     Column(
       modifier = Modifier.fillMaxSize(),
-      horizontalAlignment = Alignment.CenterHorizontally
+      horizontalAlignment = Alignment.CenterHorizontally,
     ) {
       Controls(
         selectedColor = selectedColor,
@@ -78,7 +78,7 @@ fun Sample(
             delay(500)
             resetSelectedPosition = false
           }
-        }
+        },
       )
 
       ColorPicker(
@@ -91,7 +91,7 @@ fun Sample(
             newSelectedColor.isSpecified -> newSelectedColor
             else -> defaultColor
           }
-        }
+        },
       )
     }
   }
@@ -106,21 +106,21 @@ private fun ColumnScope.Controls(
   onSelectedColorChanged: (Color) -> Unit,
   onAlphaChanged: (Float) -> Unit,
   onBrightnessChanged: (Float) -> Unit,
-  resetSelectedPosition: () -> Unit
+  resetSelectedPosition: () -> Unit,
 ) {
   Row(
     modifier = Modifier.weight(.33F).fillMaxWidth(),
-    horizontalArrangement = Arrangement.SpaceBetween
+    horizontalArrangement = Arrangement.SpaceBetween,
   ) {
     Column(
-      verticalArrangement = Arrangement.SpaceAround
+      verticalArrangement = Arrangement.SpaceAround,
     ) {
       Row(
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
       ) {
         Text(
           text = "Pick a color",
-          color = selectedColor
+          color = selectedColor,
         )
 
         IconButton(
@@ -129,11 +129,11 @@ private fun ColumnScope.Controls(
             onAlphaChanged(1F)
             onBrightnessChanged(1F)
             resetSelectedPosition()
-          }
+          },
         ) {
           Icon(
             imageVector = RefreshIcon,
-            contentDescription = "Back to defaults"
+            contentDescription = "Back to defaults",
           )
         }
       }
@@ -141,12 +141,12 @@ private fun ColumnScope.Controls(
       Box(
         modifier = Modifier
           .size(75.dp)
-          .background(selectedColor)
+          .background(selectedColor),
       )
     }
 
     Column(
-      modifier = Modifier.align(Alignment.CenterVertically)
+      modifier = Modifier.align(Alignment.CenterVertically),
     ) {
       Text(text = "Alpha: ${alpha.toFixedDecimalCount(1)}")
 
@@ -158,7 +158,7 @@ private fun ColumnScope.Controls(
         valueRange = 0F..1F,
         steps = 0,
         colors = SliderDefaults.colors(thumbColor = selectedColor, activeTrackColor = selectedColor),
-        modifier = Modifier.width(200.dp)
+        modifier = Modifier.width(200.dp),
       )
 
       Text(text = "Brightness: ${brightness.toFixedDecimalCount(1)}")
@@ -171,7 +171,7 @@ private fun ColumnScope.Controls(
         valueRange = 0F..1F,
         steps = 0,
         colors = SliderDefaults.colors(thumbColor = selectedColor, activeTrackColor = selectedColor),
-        modifier = Modifier.width(200.dp)
+        modifier = Modifier.width(200.dp),
       )
     }
   }
@@ -180,26 +180,26 @@ private fun ColumnScope.Controls(
 @Composable
 private fun SampleCard(
   modifier: Modifier = Modifier,
-  content: @Composable BoxScope.() -> Unit
+  content: @Composable BoxScope.() -> Unit,
 ) {
   MaterialTheme(
-    colorScheme = darkColorScheme()
+    colorScheme = darkColorScheme(),
   ) {
     Box(
       modifier = modifier
         .fillMaxSize()
         .background(
-          color = MaterialTheme.colorScheme.background
-        )
+          color = MaterialTheme.colorScheme.background,
+        ),
     ) {
       Card(
         shape = MaterialTheme.shapes.small.copy(all = CornerSize(8.dp)),
         modifier = Modifier
           .fillMaxSize()
-          .padding(16.dp)
+          .padding(16.dp),
       ) {
         Box(
-          modifier = Modifier.padding(16.dp)
+          modifier = Modifier.padding(16.dp),
         ) {
           content()
         }

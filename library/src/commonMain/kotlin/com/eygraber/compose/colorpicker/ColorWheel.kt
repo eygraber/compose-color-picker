@@ -16,14 +16,14 @@ internal class ColorWheel(
   diameter: Int,
   radius: Float,
   alpha: Float,
-  brightness: Float
+  brightness: Float,
 ) {
   private fun Color.applyBrightnessAndAlpha(alpha: Float, brightness: Float) =
     copy(
       red = red * brightness,
       green = green * brightness,
       blue = blue * brightness,
-      alpha = alpha
+      alpha = alpha,
     )
 
   private val sweepGradient = SweepGradientShader(
@@ -34,19 +34,19 @@ internal class ColorWheel(
       Color.Cyan.applyBrightnessAndAlpha(alpha, brightness),
       Color.Green.applyBrightnessAndAlpha(alpha, brightness),
       Color.Yellow.applyBrightnessAndAlpha(alpha, brightness),
-      Color.Red.applyBrightnessAndAlpha(alpha, brightness)
+      Color.Red.applyBrightnessAndAlpha(alpha, brightness),
     ),
     colorStops = null,
-    center = Offset(radius, radius)
+    center = Offset(radius, radius),
   )
 
   private val saturationGradient = RadialGradientShader(
     colors = listOf(
       Color.White.applyBrightnessAndAlpha(alpha, brightness),
-      Color.Transparent
+      Color.Transparent,
     ),
     center = Offset(radius, radius),
-    radius = radius
+    radius = radius,
   )
 
   val image = ImageBitmap(diameter, diameter).also { imageBitmap ->

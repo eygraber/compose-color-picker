@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 internal class MagnifierTransitionData(
   pillWidth: State<Dp>,
   selectionDiameter: State<Dp>,
-  alpha: State<Float>
+  alpha: State<Float>,
 ) {
   val pillWidth: Dp by pillWidth
   val selectionDiameter: Dp by selectionDiameter
@@ -26,7 +26,7 @@ internal class MagnifierTransitionData(
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 internal fun AnimatedVisibilityScope.updateMagnifierTransitionData(
-  options: ColorPicker.Magnifier.Default
+  options: ColorPicker.Magnifier.Default,
 ): MagnifierTransitionData {
   val labelWidth = transition.animateDp(transitionSpec = { tween() }) {
     if(it == EnterExitState.Visible) options.width else 0.dp
