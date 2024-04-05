@@ -245,6 +245,7 @@ naming:
   active: true
   BooleanPropertyNaming:
     active: true
+    allowedPattern: '^(is|has|are|should)'
   ClassNaming:
     active: true
     excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']

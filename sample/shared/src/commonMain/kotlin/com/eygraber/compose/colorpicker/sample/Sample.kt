@@ -51,7 +51,7 @@ fun Sample(
     var selectedColor by remember { mutableStateOf(defaultColor) }
     var alpha by remember { mutableFloatStateOf(1F) }
     var brightness by remember { mutableFloatStateOf(1F) }
-    var resetSelectedPosition by remember { mutableStateOf(false) }
+    var shouldResetSelectedPosition by remember { mutableStateOf(false) }
 
     Column(
       modifier = Modifier.fillMaxSize(),
@@ -72,11 +72,11 @@ fun Sample(
           brightness = newBrightness
         },
         resetSelectedPosition = {
-          resetSelectedPosition = true
+          shouldResetSelectedPosition = true
 
           GlobalScope.launch {
             delay(500)
-            resetSelectedPosition = false
+            shouldResetSelectedPosition = false
           }
         },
       )
@@ -85,7 +85,7 @@ fun Sample(
         modifier = Modifier.weight(.66F),
         alpha = alpha,
         brightness = brightness,
-        resetSelectedPosition = resetSelectedPosition,
+        resetSelectedPosition = shouldResetSelectedPosition,
         onColorSelected = { newSelectedColor ->
           selectedColor = when {
             newSelectedColor.isSpecified -> newSelectedColor

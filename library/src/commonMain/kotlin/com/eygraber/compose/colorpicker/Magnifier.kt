@@ -104,7 +104,7 @@ private fun RowScope.MagnifierLabel(
   options: ColorPicker.Magnifier.Default,
   colorProvider: () -> Color,
 ) {
-  val text = colorProvider().toHexString(options.showAlphaHex)
+  val text = colorProvider().toHexString(options.shouldShowAlphaHex)
   val textStyle = LocalTextStyle.current.copy(textAlign = TextAlign.Center)
   Text(
     text = text,

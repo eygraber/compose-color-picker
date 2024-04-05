@@ -149,7 +149,7 @@ public object ColorPicker {
       val pillHeight: Dp = 50.dp,
       val pillColorWidthWeight: Float = .25F,
       val pillHexWidthWeight: Float = .75F,
-      val showAlphaHex: Boolean = true,
+      val shouldShowAlphaHex: Boolean = true,
       // more padding on bottom to account for the default shape
       val hexPadding: PaddingValues = PaddingValues(
         end = 5.dp,
