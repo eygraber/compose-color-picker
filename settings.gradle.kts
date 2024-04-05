@@ -68,12 +68,9 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 develocity {
   buildScan {
-    termsOfServiceUrl = "https://gradle.com/terms-of-service"
     termsOfUseUrl = "https://gradle.com/terms-of-service"
     publishing.onlyIf { Env.isCI }
     if(Env.isCI) {
-      termsOfServiceAgree = "yes"
-      publishAlways()
       termsOfUseAgree = "yes"
     }
   }
