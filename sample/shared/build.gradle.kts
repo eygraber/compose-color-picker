@@ -14,6 +14,7 @@ kotlin {
     KmpTarget.Android,
     KmpTarget.Js,
     KmpTarget.Jvm,
+    KmpTarget.WasmJs,
     project = project,
     ignoreDefaultTargets = true,
   )
