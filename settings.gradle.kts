@@ -11,6 +11,12 @@ pluginManagement {
       }
     }
 
+    maven("https://maven.pkg.jetbrains.space/kotlin/p/wasm/experimental") {
+      content {
+        includeGroupByRegex("org\\.jetbrains.*")
+      }
+    }
+
     maven("https://maven.pkg.jetbrains.space/public/p/compose/dev") {
       content {
         includeGroupByRegex("org\\.jetbrains.*")
@@ -32,6 +38,8 @@ pluginManagement {
     }
 
     gradlePluginPortal()
+
+    maven("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/bootstrap")
   }
 }
 
@@ -42,12 +50,21 @@ dependencyResolutionManagement {
   // repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
 
   repositories {
+    maven("https://maven.pkg.jetbrains.space/kotlin/p/wasm/experimental") {
+      content {
+        includeGroupByRegex("org\\.jetbrains.*")
+      }
+    }
+
     addCommonRepositories(
       includeMavenCentral = true,
       includeMavenCentralSnapshots = true,
       includeGoogle = true,
       includeJetbrainsCompose = true,
     )
+
+    maven("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/bootstrap")
+    maven("https://androidx.dev/storage/compose-compiler/repository/")
   }
 }
 
@@ -60,9 +77,9 @@ rootProject.name = "compose-color-picker"
 
 include(":library")
 include(":sample:android-app")
-include(":sample:js-app")
 include(":sample:jvm-app")
 include(":sample:shared")
+include(":sample:webApp")
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 

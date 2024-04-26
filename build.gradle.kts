@@ -54,5 +54,6 @@ gradleConventionsKmpDefaults {
     KmpTarget.Ios,
     KmpTarget.Js,
     KmpTarget.Jvm,
+    KmpTarget.WasmJs,
   )
 }
