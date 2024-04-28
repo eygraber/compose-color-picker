@@ -17,6 +17,7 @@ internal class ColorWheel(
   radius: Float,
   alpha: Float,
   brightness: Float,
+  colors: List<Color>,
 ) {
   private fun Color.applyBrightnessAndAlpha(alpha: Float, brightness: Float) =
     copy(
@@ -27,15 +28,7 @@ internal class ColorWheel(
     )
 
   private val sweepGradient = SweepGradientShader(
-    colors = listOf(
-      Color.Red.applyBrightnessAndAlpha(alpha, brightness),
-      Color.Magenta.applyBrightnessAndAlpha(alpha, brightness),
-      Color.Blue.applyBrightnessAndAlpha(alpha, brightness),
-      Color.Cyan.applyBrightnessAndAlpha(alpha, brightness),
-      Color.Green.applyBrightnessAndAlpha(alpha, brightness),
-      Color.Yellow.applyBrightnessAndAlpha(alpha, brightness),
-      Color.Red.applyBrightnessAndAlpha(alpha, brightness),
-    ),
+    colors = colors.map { it.applyBrightnessAndAlpha(alpha, brightness) },
     colorStops = null,
     center = Offset(radius, radius),
   )
@@ -79,5 +72,17 @@ internal class ColorWheel(
       if(x !in 0 until width || y !in 0 until height) return Color.Unspecified
       return this[x, y].takeIf { it.alpha > 0F } ?: Color.Unspecified
     }
+  }
+
+  companion object {
+    val DefaultColors = listOf(
+      Color.Red,
+      Color.Magenta,
+      Color.Blue,
+      Color.Cyan,
+      Color.Green,
+      Color.Yellow,
+      Color.Red,
+    )
   }
 }

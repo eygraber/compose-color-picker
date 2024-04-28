@@ -27,13 +27,37 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
+@Immutable
+public data class ColorPickerState(
+  val alpha: Float,
+  val brightness: Float,
+  val magnifier: ColorPicker.Magnifier,
+  @Suppress("BooleanPropertyNaming") val resetSelectedPosition: Boolean,
+  val colors: List<Color>,
+)
+
 @Composable
-public fun ColorPicker(
-  modifier: Modifier = Modifier,
+public fun rememberColorPickerState(
   alpha: Float = 1F,
   brightness: Float = 1F,
   magnifier: ColorPicker.Magnifier = ColorPicker.Magnifier.Default(),
   resetSelectedPosition: Boolean = false,
+  @Suppress("UnstableCollections") colors: List<Color> = ColorWheel.DefaultColors,
+): ColorPickerState =
+  remember(alpha, brightness, magnifier, resetSelectedPosition, colors) {
+    ColorPickerState(
+      alpha,
+      brightness,
+      magnifier,
+      resetSelectedPosition,
+      colors,
+    )
+  }
+
+@Composable
+public fun ColorPicker(
+  modifier: Modifier = Modifier,
+  state: ColorPickerState = rememberColorPickerState(),
   onColorSelected: (Color) -> Unit,
 ) {
   BoxWithConstraints(
@@ -51,7 +75,7 @@ public fun ColorPicker(
     val isSelectedAndDiameterChanged =
       selectedPosition != Offset.Zero && diameter != previousDiameter
 
-    if(resetSelectedPosition) {
+    if(state.resetSelectedPosition) {
       if(selectedPosition != Offset.Zero) {
         selectedPositionBeforeReset = selectedPosition
       }
@@ -66,12 +90,13 @@ public fun ColorPicker(
       previousDiameter = diameter
     }
 
-    val colorWheel = remember(diameter, alpha, brightness) {
+    val colorWheel = remember(diameter, state.alpha, state.brightness) {
       ColorWheel(
         diameter = diameter,
         radius = radius,
-        alpha = alpha,
-        brightness = brightness,
+        alpha = state.alpha,
+        brightness = state.brightness,
+        colors = state.colors,
       ).apply {
         val currentColor = colorForPosition(selectedPosition)
         if(currentColor.isSpecified && currentColor != selectedColor) {
@@ -82,7 +107,7 @@ public fun ColorPicker(
     }
 
     val inputModifier = Modifier
-      .pointerInput(diameter, alpha, brightness) {
+      .pointerInput(diameter, state.alpha, state.brightness) {
         fun update(newPosition: Offset) {
           val clampedPosition = newPosition.clampToCircle(radius)
           if(clampedPosition != selectedPosition) {
@@ -112,7 +137,7 @@ public fun ColorPicker(
     ) {
       Image(contentDescription = null, bitmap = colorWheel.image)
 
-      if(magnifier is ColorPicker.Magnifier.Default) {
+      if(state.magnifier is ColorPicker.Magnifier.Default) {
         val isMagnifierVisible = selectedColor.isSpecified && selectedPosition != Offset.Zero
         AnimatedVisibility(
           visible = isMagnifierVisible,
@@ -120,8 +145,8 @@ public fun ColorPicker(
           exit = ExitTransition.None,
         ) {
           Magnifier(
-            transitionData = updateMagnifierTransitionData(magnifier),
-            magnifier = magnifier,
+            transitionData = updateMagnifierTransitionData(state.magnifier),
+            magnifier = state.magnifier,
             position = {
               when(selectedPosition) {
                 Offset.Zero -> selectedPositionBeforeReset
@@ -134,6 +159,35 @@ public fun ColorPicker(
       }
     }
   }
+}
+
+@Suppress("ktlint:standard:max-line-length")
+@Deprecated(
+  message = "Use ColorPicker(Modifier, ColorPickerState, (Color) -> Unit)",
+  level = DeprecationLevel.WARNING,
+  replaceWith = ReplaceWith(
+    "ColorPicker(modifier = modifier, state = rememberColorPickerState(alpha = alpha, brightness = brightness, magnifier = magnifier, resetSelectedPosition = resetSelectedPosition, ), onColorSelected, )",
+  ),
+)
+@Composable
+public fun ColorPicker(
+  modifier: Modifier = Modifier,
+  alpha: Float = 1F,
+  brightness: Float = 1F,
+  magnifier: ColorPicker.Magnifier = ColorPicker.Magnifier.Default(),
+  resetSelectedPosition: Boolean = false,
+  onColorSelected: (Color) -> Unit,
+) {
+  ColorPicker(
+    modifier = modifier,
+    state = rememberColorPickerState(
+      alpha = alpha,
+      brightness = brightness,
+      magnifier = magnifier,
+      resetSelectedPosition = resetSelectedPosition,
+    ),
+    onColorSelected,
+  )
 }
 
 public object ColorPicker {
