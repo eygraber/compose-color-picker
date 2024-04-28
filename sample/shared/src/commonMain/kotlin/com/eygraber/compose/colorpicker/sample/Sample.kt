@@ -33,6 +33,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.isSpecified
 import androidx.compose.ui.unit.dp
 import com.eygraber.compose.colorpicker.ColorPicker
+import com.eygraber.compose.colorpicker.rememberColorPickerState
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -83,9 +84,11 @@ fun Sample(
 
       ColorPicker(
         modifier = Modifier.weight(.66F),
-        alpha = alpha,
-        brightness = brightness,
-        resetSelectedPosition = shouldResetSelectedPosition,
+        state = rememberColorPickerState(
+          alpha = alpha,
+          brightness = brightness,
+          resetSelectedPosition = shouldResetSelectedPosition,
+        ),
         onColorSelected = { newSelectedColor ->
           selectedColor = when {
             newSelectedColor.isSpecified -> newSelectedColor
