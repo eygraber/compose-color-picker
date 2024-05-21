@@ -11,18 +11,6 @@ pluginManagement {
       }
     }
 
-    maven("https://maven.pkg.jetbrains.space/kotlin/p/wasm/experimental") {
-      content {
-        includeGroupByRegex("org\\.jetbrains.*")
-      }
-    }
-
-    maven("https://maven.pkg.jetbrains.space/public/p/compose/dev") {
-      content {
-        includeGroupByRegex("org\\.jetbrains.*")
-      }
-    }
-
     mavenCentral()
 
     maven("https://oss.sonatype.org/content/repositories/snapshots") {
@@ -38,38 +26,27 @@ pluginManagement {
     }
 
     gradlePluginPortal()
-
-    maven("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/bootstrap")
   }
 }
 
 @Suppress("UnstableApiUsage")
 dependencyResolutionManagement {
   // comment this out for now because it doesn't work with KMP js
-  // https://youtrack.jetbrains.com/issue/KT-51379/
+  // https://youtrack.jetbrains.com/issue/KT-55620/KJS-Gradle-plugin-doesnt-support-repositoriesMode
   // repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
 
   repositories {
-    maven("https://maven.pkg.jetbrains.space/kotlin/p/wasm/experimental") {
-      content {
-        includeGroupByRegex("org\\.jetbrains.*")
-      }
-    }
-
     addCommonRepositories(
       includeMavenCentral = true,
       includeMavenCentralSnapshots = true,
       includeGoogle = true,
       includeJetbrainsCompose = true,
     )
-
-    maven("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/bootstrap")
-    maven("https://androidx.dev/storage/compose-compiler/repository/")
   }
 }
 
 plugins {
-  id("com.eygraber.conventions.settings") version "0.0.71"
+  id("com.eygraber.conventions.settings") version "0.0.72"
   id("com.gradle.develocity") version "3.17.4"
 }
 
