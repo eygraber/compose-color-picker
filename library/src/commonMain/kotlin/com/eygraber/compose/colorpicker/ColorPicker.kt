@@ -58,7 +58,7 @@ public fun rememberColorPickerState(
 public fun ColorPicker(
   modifier: Modifier = Modifier,
   state: ColorPickerState = rememberColorPickerState(),
-  onColorSelected: (Color) -> Unit,
+  onSelectedColor: (Color) -> Unit,
 ) {
   BoxWithConstraints(
     modifier = modifier
@@ -101,7 +101,7 @@ public fun ColorPicker(
         val currentColor = colorForPosition(selectedPosition)
         if(currentColor.isSpecified && currentColor != selectedColor) {
           selectedColor = currentColor
-          onColorSelected(currentColor)
+          onSelectedColor(currentColor)
         }
       }
     }
@@ -115,7 +115,7 @@ public fun ColorPicker(
             if(newColor.isSpecified) {
               if(selectedColor != newColor) {
                 selectedColor = newColor
-                onColorSelected(newColor)
+                onSelectedColor(newColor)
               }
               selectedPosition = clampedPosition
             }
@@ -176,7 +176,7 @@ public fun ColorPicker(
   brightness: Float = 1F,
   magnifier: ColorPicker.Magnifier = ColorPicker.Magnifier.Default(),
   resetSelectedPosition: Boolean = false,
-  onColorSelected: (Color) -> Unit,
+  onSelectedColor: (Color) -> Unit,
 ) {
   ColorPicker(
     modifier = modifier,
@@ -186,7 +186,7 @@ public fun ColorPicker(
       magnifier = magnifier,
       resetSelectedPosition = resetSelectedPosition,
     ),
-    onColorSelected,
+    onSelectedColor,
   )
 }
 
