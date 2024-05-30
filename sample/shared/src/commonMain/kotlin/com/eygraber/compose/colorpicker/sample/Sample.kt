@@ -63,13 +63,13 @@ fun Sample(
         alpha = alpha,
         brightness = brightness,
         defaultColor = defaultColor,
-        onSelectedColorChanged = { newSelectedColor ->
+        onSelectedColorChange = { newSelectedColor ->
           selectedColor = newSelectedColor
         },
-        onAlphaChanged = { newAlpha ->
+        onAlphaChange = { newAlpha ->
           alpha = newAlpha
         },
-        onBrightnessChanged = { newBrightness ->
+        onBrightnessChange = { newBrightness ->
           brightness = newBrightness
         },
         resetSelectedPosition = {
@@ -89,7 +89,7 @@ fun Sample(
           brightness = brightness,
           resetSelectedPosition = shouldResetSelectedPosition,
         ),
-        onColorSelected = { newSelectedColor ->
+        onSelectedColor = { newSelectedColor ->
           selectedColor = when {
             newSelectedColor.isSpecified -> newSelectedColor
             else -> defaultColor
@@ -106,9 +106,9 @@ private fun ColumnScope.Controls(
   defaultColor: Color,
   alpha: Float,
   brightness: Float,
-  onSelectedColorChanged: (Color) -> Unit,
-  onAlphaChanged: (Float) -> Unit,
-  onBrightnessChanged: (Float) -> Unit,
+  onSelectedColorChange: (Color) -> Unit,
+  onAlphaChange: (Float) -> Unit,
+  onBrightnessChange: (Float) -> Unit,
   resetSelectedPosition: () -> Unit,
 ) {
   Row(
@@ -128,9 +128,9 @@ private fun ColumnScope.Controls(
 
         IconButton(
           onClick = {
-            onSelectedColorChanged(defaultColor)
-            onAlphaChanged(1F)
-            onBrightnessChanged(1F)
+            onSelectedColorChange(defaultColor)
+            onAlphaChange(1F)
+            onBrightnessChange(1F)
             resetSelectedPosition()
           },
         ) {
@@ -156,7 +156,7 @@ private fun ColumnScope.Controls(
       Slider(
         value = alpha,
         onValueChange = {
-          onAlphaChanged(it)
+          onAlphaChange(it)
         },
         valueRange = 0F..1F,
         steps = 0,
@@ -169,7 +169,7 @@ private fun ColumnScope.Controls(
       Slider(
         value = brightness,
         onValueChange = {
-          onBrightnessChanged(it)
+          onBrightnessChange(it)
         },
         valueRange = 0F..1F,
         steps = 0,
