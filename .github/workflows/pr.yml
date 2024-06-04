@@ -32,7 +32,7 @@ jobs:
           validate-wrappers: true
 
       - name: Run detekt
-        run: ./format --no-format && ./detekt
+        run: ./gradlew detektAll
 
   detektIos:
     runs-on: macos-latest
@@ -53,6 +53,14 @@ jobs:
 
       - name: Build for iOS
         run: ./gradlew detektIosMain
+
+  ktlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run ktlint
+        run: ./format --no-format
 
   lint:
     runs-on: ubuntu-latest
