@@ -28,8 +28,6 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: wrapper
-          gradle-home-cache-cleanup: true
-          validate-wrappers: true
 
       - name: Run detekt
         run: ./gradlew detektAll
@@ -48,8 +46,6 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: wrapper
-          gradle-home-cache-cleanup: true
-          validate-wrappers: true
 
       - name: Build for iOS
         run: ./gradlew detektIosMain
@@ -76,8 +72,6 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: wrapper
-          gradle-home-cache-cleanup: true
-          validate-wrappers: true
 
       - name: Run checks
         run: ./gradlew lintRelease
@@ -96,8 +90,6 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: wrapper
-          gradle-home-cache-cleanup: true
-          validate-wrappers: true
 
       - name: Run checks
         run: ./gradlew test
