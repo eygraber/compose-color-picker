@@ -27,7 +27,7 @@ publish = "0.29.0"
 conventions = { id = "com.eygraber.conventions", version.ref = "conventions" }
 
 [libraries]
-android-desugar = "com.android.tools:desugar_jdk_libs:2.1.1"
+android-desugar = "com.android.tools:desugar_jdk_libs:2.1.2"
 
 androidx-activity = { module = "androidx.activity:activity-ktx", version.ref = "androidx-activity" }
 androidx-activityCompose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
