@@ -83,18 +83,18 @@ fun Sample(
       )
 
       ColorPicker(
-        modifier = Modifier.weight(.66F),
-        state = rememberColorPickerState(
-          alpha = alpha,
-          brightness = brightness,
-          resetSelectedPosition = shouldResetSelectedPosition,
-        ),
         onSelectedColor = { newSelectedColor ->
           selectedColor = when {
             newSelectedColor.isSpecified -> newSelectedColor
             else -> defaultColor
           }
         },
+        modifier = Modifier.weight(.66F),
+        state = rememberColorPickerState(
+          alpha = alpha,
+          brightness = brightness,
+          resetSelectedPosition = shouldResetSelectedPosition,
+        ),
       )
     }
   }
