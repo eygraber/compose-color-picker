@@ -56,9 +56,9 @@ public fun rememberColorPickerState(
 
 @Composable
 public fun ColorPicker(
+  onSelectedColor: (Color) -> Unit,
   modifier: Modifier = Modifier,
   state: ColorPickerState = rememberColorPickerState(),
-  onSelectedColor: (Color) -> Unit,
 ) {
   BoxWithConstraints(
     modifier = modifier
@@ -171,14 +171,15 @@ public fun ColorPicker(
 )
 @Composable
 public fun ColorPicker(
+  onSelectedColor: (Color) -> Unit,
   modifier: Modifier = Modifier,
   alpha: Float = 1F,
   brightness: Float = 1F,
   magnifier: ColorPicker.Magnifier = ColorPicker.Magnifier.Default(),
   resetSelectedPosition: Boolean = false,
-  onSelectedColor: (Color) -> Unit,
 ) {
   ColorPicker(
+    onSelectedColor = onSelectedColor,
     modifier = modifier,
     state = rememberColorPickerState(
       alpha = alpha,
@@ -186,7 +187,6 @@ public fun ColorPicker(
       magnifier = magnifier,
       resetSelectedPosition = resetSelectedPosition,
     ),
-    onSelectedColor,
   )
 }
 
