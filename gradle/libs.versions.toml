@@ -5,7 +5,7 @@ android-sdk-compile = "35"
 android-sdk-target = "35"
 android-sdk-min = "21"
 
-androidx-activity = "1.10.0"
+androidx-activity = "1.10.1"
 
 composeJetbrains = "1.7.3"
 
