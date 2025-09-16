@@ -1,10 +1,14 @@
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.ExperimentalComposeUiApi
-import androidx.compose.ui.window.CanvasBasedWindow
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.window.ComposeViewport
 import com.eygraber.compose.colorpicker.sample.Sample
 
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
-  CanvasBasedWindow("ColorPicker") {
-    Sample()
+  ComposeViewport {
+    Sample(
+      modifier = Modifier.fillMaxSize(),
+    )
   }
 }
