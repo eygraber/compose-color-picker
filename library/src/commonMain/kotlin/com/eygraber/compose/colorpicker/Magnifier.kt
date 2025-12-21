@@ -45,9 +45,9 @@ internal fun Magnifier(
     val (x, y) = position()
 
     IntOffset(
-      (x - magnifier.width.roundToPx() / 2).toInt(),
+      x = (x - magnifier.width.roundToPx() / 2).toInt(),
       // Align with the center of the selection circle
-      (y - (magnifier.height.roundToPx() + magnifier.selectionDiameter.roundToPx()) / 2).toInt(),
+      y = (y - (magnifier.height.roundToPx() + magnifier.selectionDiameter.roundToPx()) / 2).toInt(),
     )
   }
 
@@ -144,7 +144,15 @@ internal val MagnifierPopupShape = GenericShape { size, _ ->
   val arrowY = height * 0.8f
   val arrowXOffset = width * 0.4f
 
-  addRoundRect(RoundRect(0f, 0f, width, arrowY, cornerRadius = CornerRadius(20f, 20f)))
+  addRoundRect(
+    RoundRect(
+      left = 0f,
+      top = 0f,
+      right = width,
+      bottom = arrowY,
+      cornerRadius = CornerRadius(20f, 20f),
+    ),
+  )
 
   moveTo(arrowXOffset, arrowY)
   lineTo(width / 2f, height)

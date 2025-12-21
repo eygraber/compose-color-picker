@@ -46,11 +46,11 @@ public fun rememberColorPickerState(
 ): ColorPickerState =
   remember(alpha, brightness, magnifier, resetSelectedPosition, colors) {
     ColorPickerState(
-      alpha,
-      brightness,
-      magnifier,
-      resetSelectedPosition,
-      colors,
+      alpha = alpha,
+      brightness = brightness,
+      magnifier = magnifier,
+      resetSelectedPosition = resetSelectedPosition,
+      colors = colors,
     )
   }
 
