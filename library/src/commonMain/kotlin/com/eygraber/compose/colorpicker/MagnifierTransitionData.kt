@@ -41,6 +41,10 @@ internal fun AnimatedVisibilityScope.updateMagnifierTransitionData(
   }
 
   return remember(transition) {
-    MagnifierTransitionData(labelWidth, magnifierDiameter, alpha)
+    MagnifierTransitionData(
+      pillWidth = labelWidth,
+      selectionDiameter = magnifierDiameter,
+      alpha = alpha,
+    )
   }
 }

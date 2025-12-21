@@ -28,7 +28,7 @@ internal fun Offset.translate(
 internal fun Offset.clampToCircle(radius: Float): Offset {
   val dx = x - radius
   val dy = y - radius
-  val d = hypot(dx, dy)
+  val d = hypot(x = dx, y = dy)
   return when {
     d > radius -> Offset(
       x = radius + dx * (radius - 2) / d,
