@@ -192,9 +192,9 @@ public fun ColorPicker(
 
 public object ColorPicker {
   @Immutable
-  public sealed class Magnifier {
+  public sealed interface Magnifier {
     @Immutable
-    public data object None : Magnifier()
+    public data object None : Magnifier
 
     @Immutable
     public data class Default(
@@ -212,6 +212,6 @@ public object ColorPicker {
       ),
       val selectionDiameter: Dp = 15.dp,
       val popupShape: GenericShape = MagnifierPopupShape,
-    ) : Magnifier()
+    ) : Magnifier
   }
 }
