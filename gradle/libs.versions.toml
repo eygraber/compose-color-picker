@@ -1,13 +1,13 @@
 [versions]
 agp = "9.3.2"
 
-android-sdk-compile = "36"
+android-sdk-compile = "37"
 android-sdk-target = "36"
 android-sdk-min = "23"
 
 androidx-activity = "1.13.0"
 
-composeJetbrains = "1.11.1"
+composeJetbrains = "1.12.0"
 composeMaterial3Jetbrains = "1.9.0"
 
 conventions = "0.0.102"
